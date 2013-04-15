@@ -1,5 +1,5 @@
 # Web-basierte Anwendungen 2: Verteilte Systeme
 ## Phase 2
 
-Sascha Rothkopf
+Sascha Rothkopf  
 Aaron Reiher
