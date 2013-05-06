@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:element name="id">
+		<xs:simpleType>
+			<xs:restriction base="xs:int">
+				<xs:minInclusive value="0"></xs:minInclusive>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:element>
+	<xs:element name="title" type="xs:string"></xs:element>
+    <xs:element name="artist" type="xs:string"></xs:element>
+    <xs:element name="length">
+    	<xs:simpleType>
+    		<xs:restriction base="xs:int">
+    			<xs:minInclusive value="1"></xs:minInclusive>
+    		</xs:restriction>
+    	</xs:simpleType>
+    </xs:element>
+    <xs:element name="album" type="xs:string"></xs:element>
+    <xs:element name="album_cover" type="xs:string"></xs:element>
+    <xs:element name="album_artist" type="xs:string"></xs:element>
+    <xs:element name="number_in_album">
+    	<xs:simpleType>
+    		<xs:restriction base="xs:int">
+    			<xs:minInclusive value="1"></xs:minInclusive>
+    		</xs:restriction>
+    	</xs:simpleType>
+    </xs:element>
+    <xs:element name="genre" type="xs:string"></xs:element>
+
+    <xs:element name="song">
+    	<xs:complexType>
+    		<xs:sequence>
+			    <xs:element ref="artist" maxOccurs="1" minOccurs="1"></xs:element>
+                <xs:element ref="title" maxOccurs="1" minOccurs="1"></xs:element>
+                <xs:element ref="length" maxOccurs="1" minOccurs="1"></xs:element>
+			    <xs:element ref="album" maxOccurs="1" minOccurs="0"></xs:element>
+			    <xs:element ref="album_cover" maxOccurs="1" minOccurs="0"></xs:element>
+			    <xs:element ref="album_artist" maxOccurs="1" minOccurs="0"></xs:element>
+			    <xs:element ref="number_in_album" maxOccurs="1" minOccurs="0"></xs:element>
+			    <xs:element ref="genre" maxOccurs="1" minOccurs="1"></xs:element>
+    		</xs:sequence>
+    	</xs:complexType>
+    </xs:element>
+
+    <xs:element name="list">
+    	<xs:complexType>
+    		<xs:sequence>
+    			<xs:element ref="song" maxOccurs="unbounded" minOccurs="1"></xs:element>
+    		</xs:sequence>
+    	</xs:complexType>
+    </xs:element>
+
+
+</xs:schema>
