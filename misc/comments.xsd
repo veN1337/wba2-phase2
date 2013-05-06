@@ -5,7 +5,7 @@
     <xs:element name="time" type="xs:dateTime"></xs:element>
     <xs:element name="rating">
     	<xs:simpleType>
-    		<xs:restriction base="xs:decimal">
+    		<xs:restriction base="xs:int">
     			<xs:minInclusive value="0"></xs:minInclusive>
     			<xs:maxInclusive value="10"></xs:maxInclusive>
     		</xs:restriction>

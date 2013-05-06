@@ -3,11 +3,23 @@
 
     <xs:element name="title" type="xs:string"></xs:element>
     <xs:element name="artist" type="xs:string"></xs:element>
-    <xs:element name="length" type="xs:string"></xs:element>
+    <xs:element name="length">
+    	<xs:simpleType>
+    		<xs:restriction base="xs:int">
+    			<xs:minInclusive value="1"></xs:minInclusive>
+    		</xs:restriction>
+    	</xs:simpleType>
+    </xs:element>
     <xs:element name="album" type="xs:string"></xs:element>
     <xs:element name="album_cover" type="xs:string"></xs:element>
     <xs:element name="album_artist" type="xs:string"></xs:element>
-    <xs:element name="number_in_album" type="xs:string"></xs:element>    
+    <xs:element name="number_in_album">
+    	<xs:simpleType>
+    		<xs:restriction base="xs:int">
+    			<xs:minInclusive value="1"></xs:minInclusive>
+    		</xs:restriction>
+    	</xs:simpleType>
+    </xs:element>
     <xs:element name="genre" type="xs:string"></xs:element>
 
     <xs:element name="song">
