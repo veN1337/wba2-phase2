@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<song>
+  	<id>4</id>
+  	<artist>Nirvana</artist>
+  	<title>Smells Like Teen Spirit</title>
+	<length>270</length>
+   	<album>Nevermind</album>
+	<album_artist>Nirvana</album_artist>
+   	<number_in_album>1</number_in_album>
+  	<genre>Grunge</genre>
+</song>

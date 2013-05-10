@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<list>
+    <song>
+        <id>0</id>
+        <artist>Nirvana</artist>
+        <title>Smells Like Teen Spirit</title>
+        <length>270</length>
+        <album>Nevermind</album>
+        <album_artist>Nirvana</album_artist>
+        <number_in_album>1</number_in_album>
+        <genre>Grunge</genre>
+    </song>
+    <song>
+        <id>1</id>
+        <artist>Avicii</artist>
+        <title>Levels</title>
+        <length>337</length>
+        <album>The Battery Pack</album>
+        <album_artist>Avicii</album_artist>
+        <number_in_album>3</number_in_album>
+        <genre>Progressive House</genre>
+    </song>
+    <song>
+        <id>2</id>
+        <artist>Zedd</artist>
+        <title>Clarity (feat. Foxes)</title>
+        <length>271</length>
+        <album>Clarity</album>
+        <album_artist>Zedd</album_artist>
+        <number_in_album>1</number_in_album>
+        <genre>Dance</genre>
+    </song>
+</list>
