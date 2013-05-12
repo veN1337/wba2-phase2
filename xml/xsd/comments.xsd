@@ -27,7 +27,7 @@
     <xs:element name="comments">
     	<xs:complexType>
     		<xs:sequence>
-    			<xs:element ref="comment"></xs:element>
+    			<xs:element ref="comment" maxOccurs="unbounded" minOccurs="0"></xs:element>
     		</xs:sequence>
     	</xs:complexType>
     </xs:element>

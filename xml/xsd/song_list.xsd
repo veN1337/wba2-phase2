@@ -50,7 +50,7 @@
    		</xs:unique>
     </xs:element>
 
-    <xs:element name="list">
+    <xs:element name="songs">
     	<xs:complexType>
     		<xs:sequence>
     			<xs:element ref="song" maxOccurs="unbounded" minOccurs="1"></xs:element>
