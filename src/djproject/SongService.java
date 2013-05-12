@@ -33,37 +33,54 @@ public class SongService
 	   return list;
    }
    
-   @Path( "{ID}" )
+   @Path( "/id/{ID}" )
    @GET @Produces( "application/xml" )
-   public List song(@PathParam("ID") int id) throws JAXBException
+   public Song songbyid(@PathParam("ID") int id) throws JAXBException
    {
 	   ObjectFactory ob = new ObjectFactory();
 	   List list = ob.createList();
 	   JAXBContext ctx = JAXBContext.newInstance(List.class);
 	   Unmarshaller unm = ctx.createUnmarshaller();
 	   list = (List) unm.unmarshal(new File("xml/song_list.xml"));
-	   List song = ob.createList();
-	   song.getSong().add(list.getSong().get(id));
 	   
-	   return song;
+	   return list.getSong().get(id);
    }
    
-   @POST @Consumes( "application/xml" )
-   public List createBuch( Song s ) throws JAXBException
+   @Path( "/artist/{name}" )
+   @GET @Produces( "application/xml" )
+   public List songbyletter(@PathParam("name") String name) throws JAXBException
    {
-	   
+	   ObjectFactory ob = new ObjectFactory();
+	   List list = ob.createList();
 	   JAXBContext ctx = JAXBContext.newInstance(List.class);
 	   Unmarshaller unm = ctx.createUnmarshaller();
-	   List list = (List) unm.unmarshal(new File("xml/song_list.xml"));
-		
-	   list.getSong().add(s);
-
-	   Marshaller marshaller = ctx.createMarshaller();
-	   marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-	   marshaller.marshal(list, (new File("xml/song_list.xml")));
+	   list = (List) unm.unmarshal(new File("xml/song_list.xml"));
+	   List newlist = ob.createList();
+	   for (Song s: list.getSong()) {
+		   if (s.getArtist().startsWith(name)) {
+			   newlist.getSong().add(s);
+		   }
+	   }
 	   
-	   return list;
+	   return newlist;
    }
+   
+//   @POST @Consumes( "application/xml" )
+//   public List createBuch( Song s ) throws JAXBException
+//   {
+//	   
+//	   JAXBContext ctx = JAXBContext.newInstance(List.class);
+//	   Unmarshaller unm = ctx.createUnmarshaller();
+//	   List list = (List) unm.unmarshal(new File("xml/song_list.xml"));
+//		
+//	   list.getSong().add(s);
+//
+//	   Marshaller marshaller = ctx.createMarshaller();
+//	   marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+//
+//	   marshaller.marshal(list, (new File("xml/song_list.xml")));
+//	   
+//	   return list;
+//   }
    
 }
