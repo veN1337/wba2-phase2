@@ -2,13 +2,14 @@
 // Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.2.6 generiert 
 // Siehe <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
-// Generiert: 2013.05.10 um 09:01:14 PM CEST 
+// Generiert: 2013.05.12 um 03:07:41 PM CEST 
 //
 
 
 package djproject.songs;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -39,11 +40,11 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "song"
 })
-@XmlRootElement(name = "list")
-public class List {
+@XmlRootElement(name = "songs")
+public class Songs {
 
     @XmlElement(required = true)
-    protected java.util.List<Song> song;
+    protected List<Song> song;
 
     /**
      * Gets the value of the song property.
@@ -67,7 +68,7 @@ public class List {
      * 
      * 
      */
-    public java.util.List<Song> getSong() {
+    public List<Song> getSong() {
         if (song == null) {
             song = new ArrayList<Song>();
         }
