@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<list>
+<songs>
     <song>
         <id>0</id>
         <artist>Nirvana</artist>
@@ -30,4 +30,4 @@
         <number_in_album>1</number_in_album>
         <genre>Dance</genre>
     </song>
-</list>
+</songs>
