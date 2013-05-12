@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <comments xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="xsd/comments.xsd">
   <comment>
+    <id>0</id>
     <author>Sascha</author>
     <time>2013-05-08T02:20:00</time>
     <rating>8</rating>
     <content>Super DJ!</content>
   </comment>
   <comment>
+    <id>1</id>
     <author>Aaron</author>
     <time>2013-05-08T02:40:00</time>
     <rating>4</rating>
