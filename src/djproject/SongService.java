@@ -8,6 +8,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -21,19 +22,19 @@ import djproject.songs.Song;
 @Path( "/songs" )
 public class SongService
 {
-   @GET @Produces( "application/xml" )
-   public Songs songs() throws JAXBException
-   {
-	   ObjectFactory ob = new ObjectFactory();
-	   Songs list = ob.createSongs();
-	   JAXBContext ctx = JAXBContext.newInstance(Songs.class);
-	   Unmarshaller unm = ctx.createUnmarshaller();
-	   list = (Songs) unm.unmarshal(new File("xml/song_list.xml"));
-	   
-	   return list;
-   }
+//   @GET @Produces( "application/xml" )
+//   public Songs songs() throws JAXBException
+//   {
+//	   ObjectFactory ob = new ObjectFactory();
+//	   Songs list = ob.createSongs();
+//	   JAXBContext ctx = JAXBContext.newInstance(Songs.class);
+//	   Unmarshaller unm = ctx.createUnmarshaller();
+//	   list = (Songs) unm.unmarshal(new File("xml/song_list.xml"));
+//	   
+//	   return list;
+//   }
    
-   @Path( "/id/{ID}" )
+   @Path( "/{ID}" )
    @GET @Produces( "application/xml" )
    public Song songbyid(@PathParam("ID") int id) throws JAXBException
    {
@@ -46,9 +47,9 @@ public class SongService
 	   return list.getSong().get(id);
    }
    
-   @Path( "/artist/{name}" )
+   //@Path( "/artist/{name}" )
    @GET @Produces( "application/xml" )
-   public Songs songbyletter(@PathParam("name") String name) throws JAXBException
+   public Songs songbyletter(@QueryParam("artist") String artist) throws JAXBException
    {
 	   ObjectFactory ob = new ObjectFactory();
 	   Songs list = ob.createSongs();
@@ -56,31 +57,35 @@ public class SongService
 	   Unmarshaller unm = ctx.createUnmarshaller();
 	   list = (Songs) unm.unmarshal(new File("xml/song_list.xml"));
 	   Songs newlist = ob.createSongs();
-	   for (Song s: list.getSong()) {
-		   if (s.getArtist().startsWith(name)) {
-			   newlist.getSong().add(s);
+	   if (artist != "") {
+		   for (Song s: list.getSong()) {
+			   if (s.getArtist().startsWith(artist)) {
+				   newlist.getSong().add(s);
+			   }
 		   }
+		   return newlist;
 	   }
 	   
-	   return newlist;
+	   return list;
+	   
    }
    
-//   @POST @Consumes( "application/xml" )
-//   public Songs createBuch( Song s ) throws JAXBException
-//   {
-//	   
-//	   JAXBContext ctx = JAXBContext.newInstance(Songs.class);
-//	   Unmarshaller unm = ctx.createUnmarshaller();
-//	   Songs list = (Songs) unm.unmarshal(new File("xml/song_list.xml"));
-//		
-//	   list.getSong().add(s);
-//
-//	   Marshaller marshaller = ctx.createMarshaller();
-//	   marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-//
-//	   marshaller.marshal(list, (new File("xml/song_list.xml")));
-//	   
-//	   return list;
-//   }
+   @POST @Consumes( "application/xml" )
+   public Songs createBuch( Song s ) throws JAXBException
+   {
+	   
+	   JAXBContext ctx = JAXBContext.newInstance(Songs.class);
+	   Unmarshaller unm = ctx.createUnmarshaller();
+	   Songs list = (Songs) unm.unmarshal(new File("xml/song_list.xml"));
+		
+	   list.getSong().add(s);
+
+	   Marshaller marshaller = ctx.createMarshaller();
+	   marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+	   marshaller.marshal(list, (new File("xml/song_list.xml")));
+	   
+	   return list;
+   }
    
 }
