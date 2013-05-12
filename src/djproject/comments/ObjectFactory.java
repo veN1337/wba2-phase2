@@ -2,7 +2,7 @@
 // Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.2.6 generiert 
 // Siehe <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
-// Generiert: 2013.05.12 um 03:07:56 PM CEST 
+// Generiert: 2013.05.12 um 06:36:02 PM CEST 
 //
 
 
@@ -32,6 +32,7 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _Id_QNAME = new QName("", "id");
     private final static QName _Content_QNAME = new QName("", "content");
     private final static QName _Author_QNAME = new QName("", "author");
     private final static QName _Time_QNAME = new QName("", "time");
@@ -58,6 +59,15 @@ public class ObjectFactory {
      */
     public Comments createComments() {
         return new Comments();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Integer }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "", name = "id")
+    public JAXBElement<Integer> createId(Integer value) {
+        return new JAXBElement<Integer>(_Id_QNAME, Integer.class, null, value);
     }
 
     /**

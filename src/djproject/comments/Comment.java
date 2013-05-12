@@ -2,7 +2,7 @@
 // Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.2.6 generiert 
 // Siehe <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
-// Generiert: 2013.05.12 um 03:07:56 PM CEST 
+// Generiert: 2013.05.12 um 06:36:02 PM CEST 
 //
 
 
@@ -27,6 +27,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element ref="{}id"/>
  *         &lt;element ref="{}author" minOccurs="0"/>
  *         &lt;element ref="{}time"/>
  *         &lt;element ref="{}rating" minOccurs="0"/>
@@ -41,6 +42,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
+    "id",
     "author",
     "time",
     "rating",
@@ -49,6 +51,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlRootElement(name = "comment")
 public class Comment {
 
+    protected int id;
     protected String author;
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
@@ -56,6 +59,22 @@ public class Comment {
     protected Integer rating;
     @XmlElement(required = true)
     protected String content;
+
+    /**
+     * Ruft den Wert der id-Eigenschaft ab.
+     * 
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Legt den Wert der id-Eigenschaft fest.
+     * 
+     */
+    public void setId(int value) {
+        this.id = value;
+    }
 
     /**
      * Ruft den Wert der author-Eigenschaft ab.
