@@ -2,6 +2,8 @@ package djproject;
 
 import java.io.File;
 import java.text.ParseException;
+
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -10,6 +12,7 @@ import javax.ws.rs.QueryParam;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.datatype.DatatypeConfigurationException;
 import djproject.comments.Comment;
@@ -46,6 +49,31 @@ public class CommentService
 	   return list.getComment().get(id);
    }
    
+   @Path( "/{ID}" )
+   @DELETE
+   public Comments deletebyid(@PathParam("ID") int id) throws JAXBException
+   {	
+	   ObjectFactory ob = new ObjectFactory();
+	   Comments list = ob.createComments();
+	   JAXBContext ctx = JAXBContext.newInstance(Comments.class);
+	   Unmarshaller unm = ctx.createUnmarshaller();
+	   list = (Comments) unm.unmarshal(new File("xml/comments.xml"));
+	   Comments newlist = ob.createComments();
+		
+	   for (Comment c: list.getComment()) {
+		   if (c.getId() != id) {
+			   newlist.getComment().add(c);
+		   }
+	   }
+		
+	   Marshaller marshaller = ctx.createMarshaller();
+	   marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+	   marshaller.marshal(newlist, (new File("xml/comments.xml")));
+		
+	   return newlist;
+	}
+   
    @GET @Produces( "application/xml" )
    public Comments querycomment( @QueryParam("rating") int r ) throws JAXBException, ParseException, DatatypeConfigurationException {
 	   ObjectFactory ob = new ObjectFactory();
@@ -59,14 +87,15 @@ public class CommentService
 //	   GregorianCalendar gc = (GregorianCalendar) GregorianCalendar.getInstance();
 //	   gc.setTime(date2);
 //	   XMLGregorianCalendar xmldate = DatatypeFactory.newInstance().newXMLGregorianCalendar(gc);
-
-	   for (Comment c: list.getComment()) {
-		   if(c.getRating() >= r) {
-			   newlist.getComment().add(c);
-		   }
+	   if (r > 0) {
+		   for (Comment c: list.getComment()) {
+			   if(c.getRating() >= r) {
+				   newlist.getComment().add(c);
+			   }
+		   }		   
+		   return newlist;
 	   }
-	   
-	   return newlist;
+	   return list;
    }
    
 }
