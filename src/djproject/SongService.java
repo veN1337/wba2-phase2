@@ -14,7 +14,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import djproject.songs.List;
+import djproject.songs.Songs;
 import djproject.songs.ObjectFactory;
 import djproject.songs.Song;
 
@@ -22,13 +22,13 @@ import djproject.songs.Song;
 public class SongService
 {
    @GET @Produces( "application/xml" )
-   public List songs() throws JAXBException
+   public Songs songs() throws JAXBException
    {
 	   ObjectFactory ob = new ObjectFactory();
-	   List list = ob.createList();
-	   JAXBContext ctx = JAXBContext.newInstance(List.class);
+	   Songs list = ob.createSongs();
+	   JAXBContext ctx = JAXBContext.newInstance(Songs.class);
 	   Unmarshaller unm = ctx.createUnmarshaller();
-	   list = (List) unm.unmarshal(new File("xml/song_list.xml"));
+	   list = (Songs) unm.unmarshal(new File("xml/song_list.xml"));
 	   
 	   return list;
    }
@@ -38,24 +38,24 @@ public class SongService
    public Song songbyid(@PathParam("ID") int id) throws JAXBException
    {
 	   ObjectFactory ob = new ObjectFactory();
-	   List list = ob.createList();
-	   JAXBContext ctx = JAXBContext.newInstance(List.class);
+	   Songs list = ob.createSongs();
+	   JAXBContext ctx = JAXBContext.newInstance(Songs.class);
 	   Unmarshaller unm = ctx.createUnmarshaller();
-	   list = (List) unm.unmarshal(new File("xml/song_list.xml"));
+	   list = (Songs) unm.unmarshal(new File("xml/song_list.xml"));
 	   
 	   return list.getSong().get(id);
    }
    
    @Path( "/artist/{name}" )
    @GET @Produces( "application/xml" )
-   public List songbyletter(@PathParam("name") String name) throws JAXBException
+   public Songs songbyletter(@PathParam("name") String name) throws JAXBException
    {
 	   ObjectFactory ob = new ObjectFactory();
-	   List list = ob.createList();
-	   JAXBContext ctx = JAXBContext.newInstance(List.class);
+	   Songs list = ob.createSongs();
+	   JAXBContext ctx = JAXBContext.newInstance(Songs.class);
 	   Unmarshaller unm = ctx.createUnmarshaller();
-	   list = (List) unm.unmarshal(new File("xml/song_list.xml"));
-	   List newlist = ob.createList();
+	   list = (Songs) unm.unmarshal(new File("xml/song_list.xml"));
+	   Songs newlist = ob.createSongs();
 	   for (Song s: list.getSong()) {
 		   if (s.getArtist().startsWith(name)) {
 			   newlist.getSong().add(s);
@@ -66,12 +66,12 @@ public class SongService
    }
    
 //   @POST @Consumes( "application/xml" )
-//   public List createBuch( Song s ) throws JAXBException
+//   public Songs createBuch( Song s ) throws JAXBException
 //   {
 //	   
-//	   JAXBContext ctx = JAXBContext.newInstance(List.class);
+//	   JAXBContext ctx = JAXBContext.newInstance(Songs.class);
 //	   Unmarshaller unm = ctx.createUnmarshaller();
-//	   List list = (List) unm.unmarshal(new File("xml/song_list.xml"));
+//	   Songs list = (Songs) unm.unmarshal(new File("xml/song_list.xml"));
 //		
 //	   list.getSong().add(s);
 //
