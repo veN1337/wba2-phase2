@@ -23,17 +23,6 @@ import djproject.songs.Song;
 @Path( "/songs" )
 public class SongService
 {
-//   @GET @Produces( "application/xml" )
-//   public Songs songs() throws JAXBException
-//   {
-//	   ObjectFactory ob = new ObjectFactory();
-//	   Songs list = ob.createSongs();
-//	   JAXBContext ctx = JAXBContext.newInstance(Songs.class);
-//	   Unmarshaller unm = ctx.createUnmarshaller();
-//	   list = (Songs) unm.unmarshal(new File("xml/song_list.xml"));
-//	   
-//	   return list;
-//   }
 	
 	@Path( "/{ID}" )
 	@GET @Produces( "application/xml" )

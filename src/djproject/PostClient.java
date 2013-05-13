@@ -12,11 +12,18 @@ public class PostClient
    {
 	   ClientConfig config = new DefaultClientConfig();
 	   Client client = Client.create(config);
-	   WebResource service = client.resource("http://localhost/songs");
+	   /*WebResource service = client.resource("http://localhost/songs");
 	   String response = service.type("application/xml")
-	                            .accept("application/xml")
-	                            .entity(new File("xml/song.xml"))
-	                            .post(String.class);
-	   System.out.println(response);
+               .accept("application/xml")
+               .entity(new File("xml/song.xml"))
+               .post(String.class);
+	   System.out.println(response);*/
+	   
+	   WebResource service2 = client.resource("http://localhost/comments");
+	   String response2 = service2.type("application/xml")
+               .accept("application/xml")
+               .entity(new File("xml/comment.xml"))
+               .post(String.class);
+	   System.out.println(response2);
    }
 }

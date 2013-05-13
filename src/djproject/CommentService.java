@@ -3,8 +3,10 @@ package djproject;
 import java.io.File;
 import java.text.ParseException;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -90,5 +92,25 @@ public class CommentService
 	   }
 	   return list;
    }
+   
+   @POST @Consumes( "application/xml" )
+   public Comments addcomment( Comment c ) throws JAXBException {
+		   
+		JAXBContext ctx = JAXBContext.newInstance(Comments.class);
+		Unmarshaller unm = ctx.createUnmarshaller();
+		Comments list = (Comments) unm.unmarshal(new File("xml/comments.xml"));
+
+		int i = list.getComment().size() - 1;
+  
+		list.getComment().add(c);
+		list.getComment().get(i+1).setId(list.getComment().get(i).getId()+1);
+
+		Marshaller marshaller = ctx.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+		marshaller.marshal(list, (new File("xml/comments.xml")));
+		   
+		return list;
+	}	
    
 }
