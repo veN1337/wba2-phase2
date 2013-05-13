@@ -19,22 +19,9 @@ import djproject.comments.Comment;
 import djproject.comments.Comments;
 import djproject.comments.ObjectFactory;
 
-
-
 @Path( "/comments" )
 public class CommentService
 {
-//   @GET @Produces( "application/xml" )
-//   public Comments comments() throws JAXBException
-//   {
-//	   ObjectFactory ob = new ObjectFactory();
-//	   Comments list = ob.createComments();
-//	   JAXBContext ctx = JAXBContext.newInstance(Comments.class);
-//	   Unmarshaller unm = ctx.createUnmarshaller();
-//	   list = (Comments) unm.unmarshal(new File("xml/comments.xml"));
-//	   
-//	   return list;
-//   }
 
    @Path( "/{ID}" )
    @GET @Produces( "application/xml" )
@@ -45,8 +32,14 @@ public class CommentService
 	   JAXBContext ctx = JAXBContext.newInstance(Comments.class);
 	   Unmarshaller unm = ctx.createUnmarshaller();
 	   list = (Comments) unm.unmarshal(new File("xml/comments.xml"));
+	   Comment newlist = ob.createComment();
 	   
-	   return list.getComment().get(id);
+		for (Comment c: list.getComment()) {
+			if (c.getId() == id) {
+				newlist = c;
+			}
+		}
+		return newlist;   
    }
    
    @Path( "/{ID}" )
