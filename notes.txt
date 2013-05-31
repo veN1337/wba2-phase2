@@ -8,3 +8,7 @@ Ranking der Wünsche
 Song Liste sortieren (Interpret oder Genre)
 
 Comments (zu Song) wie zB bei SoundCloud
+
+Topics:
+Playing now
+Wünsche
