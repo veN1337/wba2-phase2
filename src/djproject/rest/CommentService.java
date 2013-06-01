@@ -1,4 +1,4 @@
-package djproject;
+package djproject.rest;
 
 import java.io.File;
 import java.text.ParseException;
