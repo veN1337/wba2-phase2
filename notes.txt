@@ -12,3 +12,11 @@ Comments (zu Song) wie zB bei SoundCloud
 Topics:
 Playing now (Publisher: DJ, Subscriber: Zuhörer)
 Wünsche (Publisher: Zuhörer, Subscriber: DJ)
+
+//Collection Node 1: Event
+//	Leaf Node #: DJ #
+
+Collection Node 1: Event
+	Collection Node #: DJ #
+		Leaf Node 1: Playing now DJ #
+		Leaf Node 2: Wünsche DJ # (wenn aktiviert)
