@@ -51,6 +51,7 @@ public class NodeCreation {
 		    form.setPersistentItems(false);
 		    form.setPublishModel(PublishModel.open);
 		    form.setNodeType(NodeType.collection);
+		    form.setTitle("test1");
 		     	
 		    boolean exists[] = checkNodes("test1", "test2");
 		    
@@ -66,6 +67,7 @@ public class NodeCreation {
 		    if(!exists[1]) {
 				form.setCollection("test1");
 				form.setNodeType(NodeType.leaf);
+				form.setTitle("test2	");
 				leaf = (LeafNode) mgr.createNode("test2", form);
 		    } else {
 		      	leaf = mgr.getNode("test2");
