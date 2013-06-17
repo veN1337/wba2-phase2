@@ -3,6 +3,9 @@ package djproject.xmpp;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+
 import org.jivesoftware.smack.Connection;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.XMPPConnection;
@@ -11,13 +14,14 @@ import org.jivesoftware.smackx.packet.DiscoverItems;
 import org.jivesoftware.smackx.packet.DiscoverItems.Item;
 import org.jivesoftware.smackx.pubsub.*;
 
+import djproject.gui.GUI;
+
 public class Subscriber {
 	
 	private final static String server = Settings.server();
 	private final static int port = Settings.port();
 
-	public static void main(String[] args) {
-		
+	public Subscriber(GUI gui){
 		try {
 			
 			ConnectionConfiguration config = new ConnectionConfiguration(server, port);
@@ -53,12 +57,14 @@ public class Subscriber {
 				Item i1 = it.next();
 				list[i++] = i1;
 				System.out.println("Event: "+i1.getNode() + " ("+i+")");
+				gui.addEvent(i1.getNode());
 				discoItems = mgr.discoverNodes("test1");
 				Iterator<Item> it2 = discoItems.getItems();
 				while(it2.hasNext()) {
 					Item i2 = it2.next();
 					list[i++] = i2;					
 					System.out.println("DJ: "+i2.getNode() + " ("+i+")");
+					gui.addDJ(i2.getNode());
 				}
 			}			
 			
@@ -67,7 +73,7 @@ public class Subscriber {
 	        Integer input = scanner.nextInt();
 	        
 	        Node node = mgr.getNode(list[input-1].getNode());
-	        node.addItemEventListener(new ItemEventCoordinator());
+	        node.addItemEventListener(new ItemEventCoordinator(gui));
 	    	Subscription sub = node.subscribe("user2@"+server);
 	        
 	        System.out.println("Subscribed to: " + node);	
