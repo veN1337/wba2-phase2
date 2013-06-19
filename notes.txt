@@ -19,4 +19,4 @@ Wünsche (Publisher: Zuhörer, Subscriber: DJ)
 Collection Node 1: Event
 	Collection Node #: DJ #
 		Leaf Node 1: Playing now DJ #
-		Leaf Node 2: Wünsche DJ # (wenn aktiviert)
+		Leaf Node 2: Playing next DJ #
