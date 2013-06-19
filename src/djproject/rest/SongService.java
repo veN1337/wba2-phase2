@@ -24,6 +24,9 @@ import djproject.songs.Song;
 public class SongService
 {
 	
+	private static final String SONG_LIST_XML = "xml/song_list.xml";
+
+
 	@Path( "/{ID}" )
 	@GET @Produces( "application/xml" )
 	public Song songbyid(@PathParam("ID") int id) throws JAXBException
@@ -32,7 +35,7 @@ public class SongService
 		Songs list = ob.createSongs();
 		JAXBContext ctx = JAXBContext.newInstance(Songs.class);
 		Unmarshaller unm = ctx.createUnmarshaller();
-		list = (Songs) unm.unmarshal(new File("xml/song_list.xml"));
+		list = (Songs) unm.unmarshal(new File(SONG_LIST_XML));
 		Song newlist = ob.createSong();
 		   
 		for (Song s: list.getSong()) {
@@ -51,7 +54,7 @@ public class SongService
 		Songs list = ob.createSongs();
 		JAXBContext ctx = JAXBContext.newInstance(Songs.class);
 		Unmarshaller unm = ctx.createUnmarshaller();
-		list = (Songs) unm.unmarshal(new File("xml/song_list.xml"));
+		list = (Songs) unm.unmarshal(new File(SONG_LIST_XML));
 		Songs newlist = ob.createSongs();
 		
 		for (Song s: list.getSong()) {
@@ -63,7 +66,7 @@ public class SongService
 		Marshaller marshaller = ctx.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-		marshaller.marshal(newlist, (new File("xml/song_list.xml")));
+		marshaller.marshal(newlist, (new File(SONG_LIST_XML)));
 		
 		return newlist;
 	}
@@ -73,7 +76,7 @@ public class SongService
 		   
 		JAXBContext ctx = JAXBContext.newInstance(Songs.class);
 		Unmarshaller unm = ctx.createUnmarshaller();
-		Songs list = (Songs) unm.unmarshal(new File("xml/song_list.xml"));
+		Songs list = (Songs) unm.unmarshal(new File(SONG_LIST_XML));
 
 		int i = list.getSong().size() - 1;
    
@@ -83,7 +86,7 @@ public class SongService
 		Marshaller marshaller = ctx.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-		marshaller.marshal(list, (new File("xml/song_list.xml")));
+		marshaller.marshal(list, (new File(SONG_LIST_XML)));
 		   
 		return list;
 	}	
@@ -96,7 +99,7 @@ public class SongService
 	   Songs list = ob.createSongs();
 	   JAXBContext ctx = JAXBContext.newInstance(Songs.class);
 	   Unmarshaller unm = ctx.createUnmarshaller();
-	   list = (Songs) unm.unmarshal(new File("xml/song_list.xml"));
+	   list = (Songs) unm.unmarshal(new File(SONG_LIST_XML));
 	   Songs newlist = ob.createSongs();
 	   if (artist != null && !artist.isEmpty()) {
 		   for (Song s: list.getSong()) {

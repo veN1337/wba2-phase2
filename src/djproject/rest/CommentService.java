@@ -25,7 +25,9 @@ import djproject.comments.ObjectFactory;
 public class CommentService
 {
 
-   @Path( "/{ID}" )
+   private static final String COMMENTS_XML = "xml/comments.xml";
+
+@Path( "/{ID}" )
    @GET @Produces( "application/xml" )
    public Comment commentbyid(@PathParam("ID") int id) throws JAXBException
    {
@@ -33,7 +35,7 @@ public class CommentService
 	   Comments list = ob.createComments();
 	   JAXBContext ctx = JAXBContext.newInstance(Comments.class);
 	   Unmarshaller unm = ctx.createUnmarshaller();
-	   list = (Comments) unm.unmarshal(new File("xml/comments.xml"));
+	   list = (Comments) unm.unmarshal(new File(COMMENTS_XML));
 	   Comment newlist = ob.createComment();
 	   
 		for (Comment c: list.getComment()) {
@@ -52,7 +54,7 @@ public class CommentService
 	   Comments list = ob.createComments();
 	   JAXBContext ctx = JAXBContext.newInstance(Comments.class);
 	   Unmarshaller unm = ctx.createUnmarshaller();
-	   list = (Comments) unm.unmarshal(new File("xml/comments.xml"));
+	   list = (Comments) unm.unmarshal(new File(COMMENTS_XML));
 	   Comments newlist = ob.createComments();
 		
 	   for (Comment c: list.getComment()) {
@@ -64,7 +66,7 @@ public class CommentService
 	   Marshaller marshaller = ctx.createMarshaller();
 	   marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-	   marshaller.marshal(newlist, (new File("xml/comments.xml")));
+	   marshaller.marshal(newlist, (new File(COMMENTS_XML)));
 		
 	   return newlist;
 	}
@@ -75,7 +77,7 @@ public class CommentService
 	   Comments list = ob.createComments();
 	   JAXBContext ctx = JAXBContext.newInstance(Comments.class);
 	   Unmarshaller unm = ctx.createUnmarshaller();
-	   list = (Comments) unm.unmarshal(new File("xml/comments.xml"));
+	   list = (Comments) unm.unmarshal(new File(COMMENTS_XML));
 	   Comments newlist = ob.createComments();
 	   
 //	   Date date2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS z", Locale.GERMAN).parse(date);
@@ -98,7 +100,7 @@ public class CommentService
 		   
 		JAXBContext ctx = JAXBContext.newInstance(Comments.class);
 		Unmarshaller unm = ctx.createUnmarshaller();
-		Comments list = (Comments) unm.unmarshal(new File("xml/comments.xml"));
+		Comments list = (Comments) unm.unmarshal(new File(COMMENTS_XML));
 
 		int i = list.getComment().size() - 1;
   
@@ -108,7 +110,7 @@ public class CommentService
 		Marshaller marshaller = ctx.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-		marshaller.marshal(list, (new File("xml/comments.xml")));
+		marshaller.marshal(list, (new File(COMMENTS_XML)));
 		   
 		return list;
 	}	

@@ -19,11 +19,18 @@ public class PostClient
                .post(String.class);
 	   System.out.println(response);*/
 	   
-	   WebResource service2 = client.resource("http://localhost/comments");
-	   String response2 = service2.type("application/xml")
+//	   WebResource service2 = client.resource("http://localhost/comments");
+//	   String response2 = service2.type("application/xml")
+//               .accept("application/xml")
+//               .entity(new File("xml/comment.xml"))
+//               .post(String.class);
+//	   System.out.println(response2);
+	   
+	   WebResource service3 = client.resource("http://localhost/wishes");
+	   String response3 = service3.type("application/xml")
                .accept("application/xml")
-               .entity(new File("xml/comment.xml"))
+               .entity(new File("xml/wish.xml"))
                .post(String.class);
-	   System.out.println(response2);
+	   System.out.println(response3);
    }
 }
