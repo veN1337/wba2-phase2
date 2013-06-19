@@ -91,16 +91,16 @@ public class GUI extends JFrame implements ActionListener{
 			rdb_rating[i].addActionListener(listener);
 			grp_rating.add(rdb_rating[i]);
 		}
+				
+		//Event Panel wird bestückt
+		panel_events.add(new JScrollPane(list_Events), "dock west, width 300!, height 240!");
+		panel_events.add(btn_subscribeEv, "width 140!,height 30!, wrap");
+		panel_events.add(btn_unsubscribeEv, "width 140!,height 30!, wrap");
 		
 		//DJ Panel wird bestückt
 		panel_list.add(new JScrollPane(list_DJs), "dock west, width 300!, height 240!");
 		panel_list.add(btn_subscribeDJ, "width 140!,height 30!, wrap");
 		panel_list.add(btn_unsubscribeDJ, "width 140!,height 30!, wrap");
-		
-		//Event Panel wird bestückt
-		panel_events.add(new JScrollPane(list_Events), "dock west, width 300!, height 240!");
-		panel_events.add(btn_subscribeEv, "width 140!,height 30!, wrap");
-		panel_events.add(btn_unsubscribeEv, "width 140!,height 30!, wrap");
 		
 		//Song Panel wird bestückt
 		
@@ -115,8 +115,8 @@ public class GUI extends JFrame implements ActionListener{
 		panel_comments.add(new JScrollPane(txp_comments), "width 200!, height 200!, span 3");
 		
 		//Panels werden dem Tabbed Pane hinzugefügt
-		tab_pane.add("DJs", panel_list);
 		tab_pane.add("Events", panel_events);
+		tab_pane.add("DJs", panel_list);
 		tab_pane.add("Songs", panel_songs);
 		tab_pane.add("Wünsche", panel_wishes);
 		tab_pane.add("Kommentare", panel_comments);
