@@ -31,12 +31,16 @@ public class GUI extends JFrame implements ActionListener{
 	
 	JTabbedPane tab_pane = new JTabbedPane();
 	MigLayout layout = new MigLayout();
+	MigLayout layout2 = new MigLayout();
+	MigLayout layout3 = new MigLayout();
+	MigLayout layout4 = new MigLayout();
+	MigLayout layout5 = new MigLayout();
 	
 	JPanel panel_list = new JPanel(layout);
-	JPanel panel_events = new JPanel(layout);
-	JPanel panel_songs = new JPanel(layout);
-	JPanel panel_wishes = new JPanel(layout);
-	JPanel panel_comments = new JPanel(layout);
+	JPanel panel_events = new JPanel(layout2);
+	JPanel panel_songs = new JPanel(layout3);
+	JPanel panel_wishes = new JPanel(layout4);
+	JPanel panel_comments = new JPanel(layout5);
 	
 	JComboBox cbox_subscriptions = new JComboBox();
 	JComboBox cbox_subscriptions2 = new JComboBox();
