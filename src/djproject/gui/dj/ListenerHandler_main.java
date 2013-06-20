@@ -36,11 +36,11 @@ CaretListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource().equals(gui.btn_filter) || e.getSource().equals(gui.txt_filter) || e.getSource().equals(gui.btn_filterreset)) {
-			if(e.getSource().equals(gui.btn_filterreset)) {
-				gui.txt_filter.setText("");
+		if(e.getSource().equals(gui.song_choose.btn_filter) || e.getSource().equals(gui.song_choose.txt_filter) || e.getSource().equals(gui.song_choose.btn_filterreset)) {
+			if(e.getSource().equals(gui.song_choose.btn_filterreset)) {
+				gui.song_choose.txt_filter.setText("");
 			}
-			gui.updateSongList();
+			gui.song_choose.updateSongList();
 		}
 	}
 
