@@ -6,10 +6,10 @@ import java.awt.dnd.DnDConstants;
 
 import javax.swing.JComponent;
 import javax.swing.JTextField;
-import javax.swing.JList;
+import javax.swing.JTable;
 import javax.swing.TransferHandler;
 
-public class ListTransferHandler extends TransferHandler {
+public class TableTransferHandler extends TransferHandler {
 
 	/**
 	 * 
@@ -49,13 +49,15 @@ public class ListTransferHandler extends TransferHandler {
     @Override
     protected Transferable createTransferable(JComponent c) {
         Transferable t = null;
-        if (c instanceof JList) {
-            @SuppressWarnings("unchecked")
-			JList<String> list = (JList<String>) c;
-            Object value = list.getSelectedValue();
-            if (value instanceof String) {
-                String li = (String) value;
-                t = new ListTransferable(li);
+        if (c instanceof JTable) {
+			JTable table = (JTable) c;
+            Object value = table.getSelectedRow();
+            if (value instanceof Integer) {
+            	String li = "";
+            	for(int i=0; i < 3; i++) {
+            		li = li + (String) table.getValueAt((Integer) value, i) + " - ";
+            	}
+                t = new ListTransferable(li.substring(0, li.length()-3));
             }
         }
         return t;

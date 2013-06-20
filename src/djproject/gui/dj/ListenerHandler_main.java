@@ -36,8 +36,12 @@ CaretListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
+		if(e.getSource().equals(gui.btn_filter) || e.getSource().equals(gui.txt_filter) || e.getSource().equals(gui.btn_filterreset)) {
+			if(e.getSource().equals(gui.btn_filterreset)) {
+				gui.txt_filter.setText("");
+			}
+			gui.updateSongList();
+		}
 	}
 
 	@Override

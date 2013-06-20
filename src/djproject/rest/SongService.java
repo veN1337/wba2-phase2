@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -93,7 +94,7 @@ public class SongService
 	
 
    @GET @Produces( "application/xml" )
-   public Songs songs(@QueryParam("artist") String artist) throws JAXBException
+   public Songs songs(@DefaultValue("") @QueryParam("type") String type, @DefaultValue("") @QueryParam("text") String text) throws JAXBException
    {
 	   ObjectFactory ob = new ObjectFactory();
 	   Songs list = ob.createSongs();
@@ -101,9 +102,32 @@ public class SongService
 	   Unmarshaller unm = ctx.createUnmarshaller();
 	   list = (Songs) unm.unmarshal(new File(SONG_LIST_XML));
 	   Songs newlist = ob.createSongs();
-	   if (artist != null && !artist.isEmpty()) {
+	   /*if (artist != null && !artist.isEmpty()) {
 		   for (Song s: list.getSong()) {
 			   if (s.getArtist().startsWith(artist)) {
+				   newlist.getSong().add(s);
+			   }
+		   }
+		   return newlist;
+	   }*/
+	   switch(type.toLowerCase()) {
+	   case "artist":
+		   for (Song s: list.getSong()) {
+			   if (s.getArtist().toLowerCase().startsWith(text.toLowerCase())) {
+				   newlist.getSong().add(s);
+			   }
+		   }
+		   return newlist;
+	   case "title":
+		   for (Song s: list.getSong()) {
+			   if (s.getTitle().toLowerCase().startsWith(text.toLowerCase())) {
+				   newlist.getSong().add(s);
+			   }
+		   }
+		   return newlist;
+	   case "genre":
+		   for (Song s: list.getSong()) {
+			   if (s.getGenre().toLowerCase().startsWith(text.toLowerCase())) {
 				   newlist.getSong().add(s);
 			   }
 		   }
