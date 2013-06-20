@@ -2,6 +2,8 @@ package djproject.gui.dj;
 
 import java.awt.Dimension;
 import java.awt.event.WindowEvent;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -33,57 +35,72 @@ public class GUI_main extends JFrame {
 	JPanel panel_editsong = new JPanel(layout5);
 	
 	JLabel label_songs = new JLabel();
+	JLabel label_songs2 = new JLabel();
 	JLabel label_currsong = new JLabel();
 	JLabel label_nextsong = new JLabel();
 	
 	JTextField txt_currsong = new JTextField();
 	JTextField txt_nextsong = new JTextField();
+	JTextField txt_artist = new JTextField();
+	JTextField txt_title = new JTextField();
+	JTextField txt_album = new JTextField();
+	JTextField txt_albumartist = new JTextField();
+	JTextField txt_number_album = new JTextField();
+	JTextField txt_genre = new JTextField();
+	JTextField txt_length = new JTextField();
 	
-	SongChoosePanel song_choose;
+	JButton btn_updatesong = new JButton("Update");
+	JButton btn_deletesong = new JButton("Delete");
 	
-//	DefaultListModel<String> listModelSongs = new DefaultListModel<String>();
-//	JList<String> list_songs = new JList<String>(listModelSongs);
+	SongChoosePanel song_choose1;
+	SongChoosePanel song_choose2;
+
+	SongInfoPanel song_info;
 	
-			
 	public GUI_main(ListenerHandler_main listenerHandler_main){
 		listener = listenerHandler_main;
 		rest = new RESTServer();
 		rest.start();
 		
-		song_choose = new SongChoosePanel(listener);
+		song_choose1 = new SongChoosePanel(listener, true);
+		song_choose2 = new SongChoosePanel(listener, false);
+		
+		song_info = new SongInfoPanel(listener);
 		
 		label_songs.setText("Drag song:");
 		label_currsong.setText("Drop current song:");
 		label_nextsong.setText("Drop next song:");
 				
+		label_songs2.setText("Choose song:");
+		
 		//Listener werden vergeben
-
+		btn_updatesong.addActionListener(listener);
+		btn_deletesong.addActionListener(listener);
 		
 		txt_currsong.setEditable(false);
 		txt_nextsong.setEditable(false);
 		
-//		list_songs.setDragEnabled(true);
-//		list_songs.setTransferHandler(new ListTransferHandler());
-//		list_songs.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
 		txt_currsong.setTransferHandler(new TableTransferHandler());
-		txt_nextsong.setTransferHandler(new TableTransferHandler());
-		
-//		for (int index = 0; index < 10; index++) {
-//            listModelSongs.addElement("Item " + index);
-//        }
-		
+		txt_nextsong.setTransferHandler(new TableTransferHandler());		
 		
 		//Song Control Panel wird bestückt
 		panel_songs.add(label_songs, "width 350!, height 30!, wrap");
-		panel_songs.add(song_choose, "width 550!, height 180!, wrap");
+		panel_songs.add(song_choose1, "width 550!, height 180!, wrap");
 		panel_songs.add(label_currsong, "width 150!, height 30!, wrap");
 		panel_songs.add(txt_currsong, "width 350!, height 30!, wrap");
 		panel_songs.add(label_nextsong, "width 150!, height 30!, wrap");
 		panel_songs.add(txt_nextsong, "width 350!, height 30!, wrap");
 		
 		//Song ändern Panel wird bestückt
-		//panel_editsong.add(label_songs, "width 350!, height 30!, wrap");
+		JLabel dummy = new JLabel();
+		
+		panel_editsong.add(label_songs2, "width 350!, height 30!, wrap");
+		panel_editsong.add(song_choose2, "width 550!, height 180!, wrap");
+		panel_editsong.add(song_info, "width 550!, height 220!, wrap");
+//		panel_editsong.add(btn_updatesong, "width 150!, height 30!, span 1");
+//		panel_editsong.add(dummy, "width 150!, height 30!, span 1");
+		panel_editsong.add(btn_deletesong, "width 150!, height 30!, span 1");
+		
 
 		//Panels werden dem GUI hinzugefügt
 		tab_pane.add("Song Control", panel_songs);
@@ -94,7 +111,7 @@ public class GUI_main extends JFrame {
 		add(tab_pane);
 		
 		//setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(new Dimension(550,500));
+		setSize(new Dimension(550,550));
 		setResizable(false);
 		setVisible(true);
 		setTitle("DJ System - DJ Client");

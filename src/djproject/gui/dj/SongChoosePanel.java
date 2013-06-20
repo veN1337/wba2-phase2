@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
@@ -46,10 +47,17 @@ public class SongChoosePanel extends JPanel {
 	
 	JTextField txt_filter = new JTextField();
 	
-	DefaultTableModel tableModelSongs = new DefaultTableModel();
+	DefaultTableModel tableModelSongs = new DefaultTableModel(){
+		private static final long serialVersionUID = 1L;
+		@Override
+	    public boolean isCellEditable(int row, int column) {
+	       //all cells false
+	       return false;
+	    }
+	};
 	JTable table_songs = new JTable(tableModelSongs);
 	
-	public SongChoosePanel(ListenerHandler_main listener) {
+	public SongChoosePanel(ListenerHandler_main listener, boolean dragable) {
 		
 		setLayout(layout);
 		
@@ -78,14 +86,20 @@ public class SongChoosePanel extends JPanel {
 		table_songs.setAutoCreateRowSorter(true);
 		table_songs.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table_songs.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table_songs.setDragEnabled(true);
-		table_songs.setTransferHandler(new TableTransferHandler());
+		if(dragable) {
+			table_songs.setDragEnabled(true);
+			table_songs.setTransferHandler(new TableTransferHandler());
+		} else {
+			table_songs.addMouseListener(listener);
+		}
 		table_songs.getTableHeader().setReorderingAllowed(false);
 		
 		tableModelSongs.addColumn("ID");
 		tableModelSongs.addColumn("Artist");
 		tableModelSongs.addColumn("Title");
 		tableModelSongs.addColumn("Album");
+		tableModelSongs.addColumn("Album Artist");
+		tableModelSongs.addColumn("Number in Album");
 		tableModelSongs.addColumn("Genre");
 		tableModelSongs.addColumn("Length");
 		
@@ -104,6 +118,8 @@ public class SongChoosePanel extends JPanel {
 			v.add(s.getArtist());
 			v.add(s.getTitle());
 			v.add(s.getAlbum());
+			v.add(s.getAlbumArtist());
+			v.add(String.valueOf(s.getNumberInAlbum()));
 			v.add(s.getGenre());
 			Format formatter = new SimpleDateFormat( "mm:ss" );
 			v.add(String.valueOf(formatter.format((s.getLength()*1000))));
@@ -124,7 +140,6 @@ public class SongChoosePanel extends JPanel {
 				TableCellRenderer renderer = table_songs.getCellRenderer(i, j);
 				Component c = renderer.getTableCellRendererComponent(table_songs, table_songs.getValueAt(i, j), false, false, i, j);
 				width = Math.max(width, c.getPreferredSize().width);
-				
 			}
 	
 			//Usethe width of the largest component (header or cell) plus a margin on other side.
