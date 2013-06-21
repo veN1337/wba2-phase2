@@ -67,7 +67,7 @@ public class NodeCreation {
 		    if(!exists[1]) {
 				form.setCollection("test1");
 				form.setNodeType(NodeType.leaf);
-				form.setTitle("test2	");
+				form.setTitle("test2");
 				leaf = (LeafNode) mgr.createNode("test2", form);
 		    } else {
 		      	leaf = mgr.getNode("test2");
