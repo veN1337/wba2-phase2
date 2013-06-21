@@ -45,7 +45,7 @@ public class WishPanel extends JPanel {
 	};
 	JTable table_songs = new JTable(tableModelSongs);
 
-	int id;
+	private int id;
 	
 	public WishPanel(ListenerHandler_main listener, boolean dragable) {
 		
@@ -122,6 +122,10 @@ public class WishPanel extends JPanel {
 			column.setMaxWidth(width + 14);
 			column.setPreferredWidth(width + 14);
 		}
+	}
+	
+	public int getId() {
+		return this.id;
 	}
 	
 	public void replaceColumn(int index, String newname) {

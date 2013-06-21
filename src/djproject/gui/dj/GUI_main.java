@@ -53,10 +53,11 @@ public class GUI_main extends JFrame {
 	JButton btn_resetsong = new JButton("Reset");
 	JButton btn_updatesong = new JButton("Update");
 	JButton btn_deletesong = new JButton("Delete");
+	JButton btn_deletewish = new JButton("Delete");
 	
 	SongChoosePanel song_control_choose;
 	SongChoosePanel song_change_choose;
-	WishPanel song_wish_choose;
+	WishPanel wish_choose;
 
 	SongInfoPanel song_change_info;
 	SongInfoPanel song_add_info;
@@ -71,9 +72,9 @@ public class GUI_main extends JFrame {
 		
 		song_control_choose = new SongChoosePanel(listener, true);
 		song_change_choose = new SongChoosePanel(listener, false);
-		song_wish_choose = new WishPanel(listener, false);
+		wish_choose = new WishPanel(listener, false);
 		
-		song_wish_choose.sortByColumn(0);
+		wish_choose.sortByColumn(0);
 		
 		song_change_info = new SongInfoPanel(listener);
 		song_add_info = new SongInfoPanel(listener);
@@ -95,15 +96,17 @@ public class GUI_main extends JFrame {
 		btn_updatesong.addActionListener(listener);
 		btn_deletesong.addActionListener(listener);
 		
+		
 		btn_addsong.setEnabled(false);
 		btn_updatesong.setEnabled(false);
 		btn_deletesong.setEnabled(false);
+		btn_deletewish.setEnabled(false);
 		
 		txt_currsong.setEditable(false);
 		txt_nextsong.setEditable(false);
 		
 		txt_currsong.setTransferHandler(new TableTransferHandler());
-		txt_nextsong.setTransferHandler(new TableTransferHandler());		
+		txt_nextsong.setTransferHandler(new TableTransferHandler());
 		
 		//Song Control Panel wird bestückt
 		panel_songs.add(label_songs, "width 350!, height 30!, wrap");
@@ -126,7 +129,7 @@ public class GUI_main extends JFrame {
 		//Wünsche Panel wird bestückt
 		JLabel dummy3 = new JLabel();
 		panel_wishes.add(label_wishes, "width 550!, height 30!, span 3, wrap");
-		panel_wishes.add(song_wish_choose, "width 550!, height 220!, span 3, wrap");
+		panel_wishes.add(wish_choose, "width 550!, height 220!, span 3, wrap");
 		
 		//Song ändern Panel wird bestückt
 		JLabel dummy2 = new JLabel();

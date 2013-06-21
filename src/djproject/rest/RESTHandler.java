@@ -60,5 +60,10 @@ public class RESTHandler {
 	            .entity(s)
 	            .post();
 	}
+
+	public static void deleteWish(int id) {
+		WebResource service = client.resource("http://localhost/wishes/" + String.valueOf(id));
+		service.type("application/xml").delete();
+	}
 	
 }

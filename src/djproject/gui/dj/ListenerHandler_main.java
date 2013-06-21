@@ -135,6 +135,12 @@ CaretListener {
 			gui.song_add_info.reset();
 			gui.btn_addsong.setEnabled(false);
 		}
+		if(e.getSource().equals(gui.btn_deletewish)) {
+			RESTHandler.deleteWish(gui.wish_choose.getId());
+			gui.wish_choose.updateSongList();
+			gui.song_change_info.reset();
+			gui.btn_deletewish.setEnabled(false);
+		}	
 	}
 
 	@Override
@@ -169,6 +175,10 @@ CaretListener {
 			gui.song_change_info.setSong(song);
 			gui.btn_updatesong.setEnabled(true);
 			gui.btn_deletesong.setEnabled(true);
+		}
+		if(e.getSource().equals(gui.wish_choose.table_songs)) {
+			gui.wish_choose.table_songs.getValueAt(gui.wish_choose.table_songs.getSelectedRow(), 0);
+			gui.btn_deletewish.setEnabled(true);
 		}
 	}
 
