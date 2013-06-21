@@ -95,6 +95,7 @@ public class GUI_main extends JFrame {
 		btn_resetsong.addActionListener(listener);
 		btn_updatesong.addActionListener(listener);
 		btn_deletesong.addActionListener(listener);
+		btn_deletewish.addActionListener(listener);
 		
 		
 		btn_addsong.setEnabled(false);
@@ -127,9 +128,9 @@ public class GUI_main extends JFrame {
 		panel_addsong.add(btn_resetsong, "width 150!, height 30!, span 1");
 		
 		//Wünsche Panel wird bestückt
-		JLabel dummy3 = new JLabel();
 		panel_wishes.add(label_wishes, "width 550!, height 30!, span 3, wrap");
-		panel_wishes.add(wish_choose, "width 550!, height 220!, span 3, wrap");
+		panel_wishes.add(wish_choose, "width 550!, height 180!, span 3, wrap");
+		panel_wishes.add(btn_deletewish, "width 150!, height 30!, span 1");
 		
 		//Song ändern Panel wird bestückt
 		JLabel dummy2 = new JLabel();

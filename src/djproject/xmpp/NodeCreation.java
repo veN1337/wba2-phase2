@@ -69,6 +69,14 @@ public class NodeCreation {
 				form.setNodeType(NodeType.leaf);
 				form.setTitle("test2");
 				leaf = (LeafNode) mgr.createNode("test2", form);
+//				form.setTitle("test3");
+//				leaf = (LeafNode) mgr.createNode("test3", form);
+//				form.setTitle("test4");
+//				leaf = (LeafNode) mgr.createNode("test4", form);
+//				form.setTitle("test5");
+//				leaf = (LeafNode) mgr.createNode("test5", form);
+//				form.setTitle("test6");
+//				leaf = (LeafNode) mgr.createNode("test6", form);
 		    } else {
 		      	leaf = mgr.getNode("test2");
 		    }
@@ -100,6 +108,11 @@ public class NodeCreation {
         try {
         	mgr.deleteNode("test1");
         	mgr.deleteNode("test2");
+//        	mgr.deleteNode("test3");
+//        	mgr.deleteNode("test4");
+//        	mgr.deleteNode("test5");
+//        	mgr.deleteNode("test6");
+        	
 		} catch (XMPPException e) {
 			e.printStackTrace();
 		}

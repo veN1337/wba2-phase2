@@ -11,7 +11,7 @@ public class RESTServer
 	private SelectorThread srv;
 	
 	public RESTServer() {
-		url = "http://localhost";
+		url = "http://localhost:4444";
 	}
 	
 	public void start() {

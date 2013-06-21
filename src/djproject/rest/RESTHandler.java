@@ -16,8 +16,10 @@ public class RESTHandler {
 	static ClientConfig config = new DefaultClientConfig();
 	static Client client = Client.create(config);
 	
+	final static String host = "http://localhost:4444";
+	
 	public static Songs getSongs(String type, String text) {
-		WebResource service = client.resource("http://localhost/songs/?type=" + type + "&text=" + text);
+		WebResource service = client.resource(host + "/songs/?type=" + type + "&text=" + text);
 		ClientResponse response = service.type("application/xml")
 	            .accept("application/xml")
 	            .get(ClientResponse.class);
@@ -25,7 +27,7 @@ public class RESTHandler {
 	}
 	
 	public static Song getSongById(int id) {
-		WebResource service = client.resource("http://localhost/songs/"+ id);
+		WebResource service = client.resource(host + "/songs/"+ id);
 		ClientResponse response = service.type("application/xml")
 	            .accept("application/xml")
 	            .get(ClientResponse.class);
@@ -33,7 +35,7 @@ public class RESTHandler {
 	}
 	
 	public static Wishes getWishes() {
-		WebResource service = client.resource("http://localhost/wishes");
+		WebResource service = client.resource(host + "/wishes");
 		ClientResponse response = service.type("application/xml")
 	            .accept("application/xml")
 	            .get(ClientResponse.class);
@@ -41,7 +43,7 @@ public class RESTHandler {
 	}
 	
 	public static void updateSong(int id, Song s) {
-		WebResource service = client.resource("http://localhost/songs/" + String.valueOf(id));
+		WebResource service = client.resource(host + "/songs/" + String.valueOf(id));
 		service.type("application/xml")
 	            .accept("application/xml")
 	            .entity(s)
@@ -49,12 +51,12 @@ public class RESTHandler {
 	}
 	
 	public static void deleteSong(int id) {
-		WebResource service = client.resource("http://localhost/songs/" + String.valueOf(id));
+		WebResource service = client.resource(host + "/songs/" + String.valueOf(id));
 		service.type("application/xml").delete();
 	}
 	
 	public static void addSong(Song s) {
-		WebResource service = client.resource("http://localhost/songs/");
+		WebResource service = client.resource(host + "/songs/");
 		service.type("application/xml")
 	            .accept("application/xml")
 	            .entity(s)
@@ -62,7 +64,7 @@ public class RESTHandler {
 	}
 
 	public static void deleteWish(int id) {
-		WebResource service = client.resource("http://localhost/wishes/" + String.valueOf(id));
+		WebResource service = client.resource(host + "/wishes/" + String.valueOf(id));
 		service.type("application/xml").delete();
 	}
 	

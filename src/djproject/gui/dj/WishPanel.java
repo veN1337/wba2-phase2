@@ -71,6 +71,7 @@ public class WishPanel extends JPanel {
 		tableModelSongs.addColumn("Album");
 		tableModelSongs.addColumn("Genre");
 		tableModelSongs.addColumn("Length");
+		tableModelSongs.addColumn("ID");
 		
 		updateSongList();
 		
@@ -82,6 +83,7 @@ public class WishPanel extends JPanel {
 		tableModelSongs.getDataVector().removeAllElements();
 		for(Wish w: RESTHandler.getWishes().getWish()) {
 			Vector<String> v = new Vector<String>();
+			v.removeAllElements();
 			id = w.getId();
 			v.add(String.valueOf(w.getCount()));
 			int sId = w.getSongId();
@@ -92,6 +94,7 @@ public class WishPanel extends JPanel {
 			v.add(s.getGenre());
 			Format formatter = new SimpleDateFormat( "mm:ss" );
 			v.add(String.valueOf(formatter.format((s.getLength()*1000))));
+			v.add(String.valueOf(w.getId()));
 			tableModelSongs.addRow(v);
 		}
 		
@@ -126,6 +129,10 @@ public class WishPanel extends JPanel {
 	
 	public int getId() {
 		return this.id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public void replaceColumn(int index, String newname) {

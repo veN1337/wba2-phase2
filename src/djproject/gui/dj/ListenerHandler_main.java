@@ -138,7 +138,6 @@ CaretListener {
 		if(e.getSource().equals(gui.btn_deletewish)) {
 			RESTHandler.deleteWish(gui.wish_choose.getId());
 			gui.wish_choose.updateSongList();
-			gui.song_change_info.reset();
 			gui.btn_deletewish.setEnabled(false);
 		}	
 	}
@@ -177,7 +176,7 @@ CaretListener {
 			gui.btn_deletesong.setEnabled(true);
 		}
 		if(e.getSource().equals(gui.wish_choose.table_songs)) {
-			gui.wish_choose.table_songs.getValueAt(gui.wish_choose.table_songs.getSelectedRow(), 0);
+			gui.wish_choose.setId(Integer.parseInt((String) gui.wish_choose.table_songs.getValueAt(gui.wish_choose.table_songs.getSelectedRow(), 6)));
 			gui.btn_deletewish.setEnabled(true);
 		}
 	}
