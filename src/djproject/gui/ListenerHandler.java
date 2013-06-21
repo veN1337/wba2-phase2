@@ -24,7 +24,7 @@ CaretListener {
 	
 	public ListenerHandler(){
 	}
-
+	
 	@Override
 	public void caretUpdate(CaretEvent arg0) {
 		// TODO Auto-generated method stub
@@ -41,9 +41,12 @@ CaretListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource().equals(gui.btn_subscribeDJ)){
-			gui.btn_subscribeDJ.setText("BLARGH!");
-			gui.panel_comments.repaint();
-			//subscribtion methode
+			sub.subscribe((String)gui.list_DJs.getSelectedValue());
+			gui.updateSubs(sub.getSubs());
+		}
+		else if(e.getSource().equals(gui.btn_unsubscribeDJ)){
+			sub.unsubscribe((String)gui.list_DJs.getSelectedValue());
+			gui.updateSubs(sub.getSubs());
 		}
 	}
 

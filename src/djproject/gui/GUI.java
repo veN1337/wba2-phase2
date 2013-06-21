@@ -1,11 +1,13 @@
 package djproject.gui;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Vector;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -13,11 +15,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextPane;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -42,8 +43,11 @@ public class GUI extends JFrame implements ActionListener{
 	JPanel panel_wishes = new JPanel(layout4);
 	JPanel panel_comments = new JPanel(layout5);
 	
-	JComboBox cbox_subscriptions = new JComboBox();
-	JComboBox cbox_subscriptions2 = new JComboBox();
+	DefaultComboBoxModel<String> subs = new DefaultComboBoxModel<>();
+	
+	JComboBox cbox_subscriptions = new JComboBox(subs);
+	JComboBox cbox_subscriptions2 = new JComboBox(subs);
+	JComboBox cbox_subscriptions3 = new JComboBox(subs);
 	
 	JButton btn_subscribeDJ = new JButton("Subscribe");
 	JButton btn_unsubscribeDJ = new JButton("Unsubscribe");
@@ -51,14 +55,11 @@ public class GUI extends JFrame implements ActionListener{
 	JButton btn_unsubscribeEv = new JButton("Unsubscribe");
 	JButton btn_wish = new JButton("Request");
 	JButton btn_comment = new JButton("Send");
+	JButton btn_meta = new JButton("Metadaten");
+	JLabel lab_playingnow = new JLabel("Currently playing:");
+	JLabel lab_currentsong = new JLabel("Rick Astley - Never gonna give you up");
 	
-	JRadioButton[] rdb_rating = {
-			new JRadioButton("1"),
-			new JRadioButton("2"),
-			new JRadioButton("3"),
-			new JRadioButton("4"),
-			new JRadioButton("5")
-	};
+	JSlider sli_rating = new JSlider(1, 10);
 	
 	ButtonGroup grp_rating = new ButtonGroup();
 	
@@ -73,6 +74,9 @@ public class GUI extends JFrame implements ActionListener{
 	DefaultListModel<String> listModelSongs = new DefaultListModel<String>();
 	JList list_Songs = new JList(listModelSongs);
 	
+	DefaultListModel<String> listModelHistory = new DefaultListModel<String>();
+	JList list_History = new JList(listModelSongs);
+	
 	public GUI(ListenerHandler listen){
 		listener = listen;
 		
@@ -86,11 +90,13 @@ public class GUI extends JFrame implements ActionListener{
 		
 		cbox_subscriptions.addActionListener(listener);
 		cbox_subscriptions2.addActionListener(listener);
+		cbox_subscriptions3.addActionListener(listener);
 		
-		for(int i = 0; i < 5; i++){
-			rdb_rating[i].addActionListener(listener);
-			grp_rating.add(rdb_rating[i]);
-		}
+		sli_rating.setMajorTickSpacing(9);
+		sli_rating.setMinorTickSpacing(1);
+		sli_rating.setPaintTicks(true);
+		
+		lab_currentsong.setFont(new Font(lab_currentsong.getFont().getName(),Font.BOLD,lab_currentsong.getFont().getSize()));
 				
 		//Event Panel wird bestückt
 		panel_events.add(new JScrollPane(list_Events), "dock west, width 300!, height 240!");
@@ -103,16 +109,23 @@ public class GUI extends JFrame implements ActionListener{
 		panel_list.add(btn_unsubscribeDJ, "width 140!,height 30!, wrap");
 		
 		//Song Panel wird bestückt
+		panel_songs.add(lab_playingnow, "span 1, width 100!");
+		panel_songs.add(lab_currentsong, "span 2, wrap");
+		panel_songs.add(cbox_subscriptions3, "width 300!, span 2");
+		panel_songs.add(btn_meta, "width 120!,height 30!, wrap");
+		panel_songs.add(new JScrollPane(list_History), "width 430!, height 175!, span 3");
 		
 		//Wünsche Panel wird bestückt
 		panel_wishes.add(cbox_subscriptions, "width 300!, span 2");
 		panel_wishes.add(btn_wish, "width 120!,height 30!, wrap");
-		panel_wishes.add(new JScrollPane(list_Songs), "width 420!, height 200!, span 3");
+		panel_wishes.add(new JScrollPane(list_Songs), "width 430!, height 200!, span 3");
 		
 		//Kommentar Panel wird bestückt
-		panel_comments.add(cbox_subscriptions2, "width 300!, span 2");
-		panel_comments.add(btn_comment, "width 120!,height 30!, wrap");
-		panel_comments.add(new JScrollPane(txp_comments), "width 200!, height 200!, span 3");
+		panel_comments.add(cbox_subscriptions2, "width 300!, span 3");
+		panel_comments.add(btn_comment, "width 120!,height 30!,span 2, wrap");
+		panel_comments.add(new JLabel("Rating: "),"width 50!");
+		panel_comments.add(sli_rating, "width 360!, span 4, wrap");
+		panel_comments.add(new JScrollPane(txp_comments), "width 430!, height 165!, span 5");
 		
 		//Panels werden dem Tabbed Pane hinzugefügt
 		tab_pane.add("Events", panel_events);
@@ -126,7 +139,7 @@ public class GUI extends JFrame implements ActionListener{
 		setSize(new Dimension(450,300));
 		setResizable(false);
 		setVisible(true);
-		setTitle("DJ System - User Client");		
+		setTitle("DJ System - User Client");
 	}
 
 	public void addDJ(String s){
@@ -135,6 +148,13 @@ public class GUI extends JFrame implements ActionListener{
 	
 	public void addEvent(String s){
 		listModelEvents.addElement(s);
+	}
+	
+	public void updateSubs(String[] s){
+		subs.removeAllElements();
+		for(int i=0;i<s.length;i++){
+			subs.addElement(s[i]);
+		}
 	}
 	
 	@Override
