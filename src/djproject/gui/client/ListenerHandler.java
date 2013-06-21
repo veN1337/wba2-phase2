@@ -1,4 +1,4 @@
-package djproject.gui;
+package djproject.gui.client;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -1,4 +1,4 @@
-package djproject.gui;
+package djproject.gui.client;
 
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;

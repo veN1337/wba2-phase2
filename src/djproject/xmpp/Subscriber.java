@@ -15,7 +15,7 @@ import org.jivesoftware.smackx.packet.DiscoverItems;
 import org.jivesoftware.smackx.packet.DiscoverItems.Item;
 import org.jivesoftware.smackx.pubsub.*;
 
-import djproject.gui.GUI;
+import djproject.gui.client.GUI;
 
 public class Subscriber {
 	

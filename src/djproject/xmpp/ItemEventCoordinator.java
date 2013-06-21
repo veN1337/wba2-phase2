@@ -4,7 +4,7 @@ import org.jivesoftware.smackx.pubsub.Item;
 import org.jivesoftware.smackx.pubsub.ItemPublishEvent;
 import org.jivesoftware.smackx.pubsub.listener.ItemEventListener;
 
-import djproject.gui.GUI;
+import djproject.gui.client.GUI;
 
 public class ItemEventCoordinator implements ItemEventListener<Item> {
 	
