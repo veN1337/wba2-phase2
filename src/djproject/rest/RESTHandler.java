@@ -23,11 +23,12 @@ public class RESTHandler {
 		return response.getEntity(Songs.class);
 	}
 	
-	public static void updateSong(int id, String artist, String title, String album, String albumartist, String numberalbum, String genre, String length) {
-//		WebResource service = client.resource("http://localhost/songs/" + String.valueOf(id));
-//		ClientResponse response = service.type("application/xml")
-//	            .accept("application/xml")
-//	            .put();
+	public static void updateSong(int id, Song s) {
+		WebResource service = client.resource("http://localhost/songs/" + String.valueOf(id));
+		service.type("application/xml")
+	            .accept("application/xml")
+	            .entity(s)
+	            .put();
 	}
 	
 	public static void deleteSong(int id) {

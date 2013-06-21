@@ -74,6 +74,7 @@ public class SongInfoPanel extends JPanel {
 	}
 	
 	public void setSong(Vector<String> song) {
+		reset();
 		id = Integer.parseInt(song.get(0));
 		txt_artist.setText(song.get(1));
 		txt_title.setText(song.get(2));

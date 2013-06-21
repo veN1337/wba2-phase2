@@ -7,6 +7,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -44,7 +45,7 @@ public class SongService
 				newlist = s;
 			}
 		}
-		return newlist;   
+		return newlist;
 	}
 	
 	@Path( "/{ID}" )
@@ -70,6 +71,30 @@ public class SongService
 		marshaller.marshal(newlist, (new File(SONG_LIST_XML)));
 		
 		return newlist;
+	}
+	
+	@Path( "/{ID}" )
+	@PUT @Consumes( "application/xml" )
+	public Songs putsong(@PathParam("ID") int id, Song song) throws JAXBException
+	{	
+		ObjectFactory ob = new ObjectFactory();
+		Songs list = ob.createSongs();
+		JAXBContext ctx = JAXBContext.newInstance(Songs.class);
+		Unmarshaller unm = ctx.createUnmarshaller();
+		list = (Songs) unm.unmarshal(new File(SONG_LIST_XML));
+		
+		for (Song s: list.getSong()) {
+			if (s.getId() == id) {
+				list.getSong().set(id, song);
+			}
+		}
+		
+		Marshaller marshaller = ctx.createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+		marshaller.marshal(list, (new File(SONG_LIST_XML)));
+		
+		return list;
 	}
    
 	@POST @Consumes( "application/xml" )

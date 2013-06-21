@@ -2,14 +2,7 @@ package djproject.gui.dj;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DropTarget;
-import java.awt.dnd.DropTargetDropEvent;
 import java.awt.event.WindowEvent;
-import java.io.File;
-import java.util.List;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -138,10 +131,10 @@ public class GUI_main extends JFrame {
 
 		//Panels werden dem GUI hinzugefügt
 		tab_pane.add("Song Control", panel_songs);
-		tab_pane.add("Wünsche", panel_wishes);
-		tab_pane.add("Kommentare", panel_comments);
-		tab_pane.add("Song hinzufügen", panel_addsong);
-		tab_pane.add("Song ändern", panel_editsong);
+		tab_pane.add("Wishes", panel_wishes);
+		tab_pane.add("Comments", panel_comments);
+		tab_pane.add("Add song", panel_addsong);
+		tab_pane.add("Change song", panel_editsong);
 		add(tab_pane);
 		
 		//setDefaultCloseOperation(EXIT_ON_CLOSE);
