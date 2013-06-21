@@ -63,7 +63,6 @@ public class WishPanel extends JPanel {
 		}
 		
 		table_songs.getTableHeader().setReorderingAllowed(false);
-		table_songs.getTableHeader().setFocusable(false);
 		
 		tableModelSongs.addColumn("Count");
 		tableModelSongs.addColumn("Artist");
@@ -80,14 +79,14 @@ public class WishPanel extends JPanel {
 	}
 	
 	public void updateSongList() {
+		table_songs.setRowSorter(null);
 		tableModelSongs.getDataVector().removeAllElements();
 		for(Wish w: RESTHandler.getWishes().getWish()) {
 			Vector<String> v = new Vector<String>();
 			v.removeAllElements();
 			id = w.getId();
 			v.add(String.valueOf(w.getCount()));
-			int sId = w.getSongId();
-			Song s = RESTHandler.getSongById(sId);
+			Song s = RESTHandler.getSongById(w.getSongId());
 			v.add(s.getArtist());
 			v.add(s.getTitle());
 			v.add(s.getAlbum());
@@ -95,11 +94,14 @@ public class WishPanel extends JPanel {
 			Format formatter = new SimpleDateFormat( "mm:ss" );
 			v.add(String.valueOf(formatter.format((s.getLength()*1000))));
 			v.add(String.valueOf(w.getId()));
+			System.out.println("" + tableModelSongs.getColumnCount());
+			System.out.println("" + v.size());
 			tableModelSongs.addRow(v);
 		}
 		
 		autoFitTable();
 		tableModelSongs.fireTableDataChanged();
+		table_songs.setAutoCreateRowSorter(true);
 
 	}
 

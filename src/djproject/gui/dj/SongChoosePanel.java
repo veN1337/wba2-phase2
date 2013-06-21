@@ -118,6 +118,7 @@ public class SongChoosePanel extends JPanel {
 	}
 	
 	public void updateSongList() {
+		table_songs.setRowSorter(null);
 		tableModelSongs.getDataVector().removeAllElements();
 		for(Song s: RESTHandler.getSongs(String.valueOf(cbox_filter.getSelectedItem()), txt_filter.getText()).getSong()) {
 			Vector<String> v = new Vector<String>();
@@ -135,6 +136,8 @@ public class SongChoosePanel extends JPanel {
 		
 		autoFitTable();
 		tableModelSongs.fireTableDataChanged();
+		
+		table_songs.setAutoCreateRowSorter(true);
 
 	}
 
