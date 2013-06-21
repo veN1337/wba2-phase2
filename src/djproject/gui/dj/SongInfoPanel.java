@@ -88,5 +88,15 @@ public class SongInfoPanel extends JPanel {
 	public int getId() {
 		return id;
 	}
+
+	public void reset() {
+		txt_artist.setText("");
+		txt_title.setText("");
+	    txt_album.setText("");
+	    txt_number_album.setText("");
+	    txt_albumartist.setText("");
+	    txt_genre.setText("");
+	    txt_length.setText("");
+	}
 	
 }

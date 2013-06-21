@@ -1,8 +1,16 @@
 package djproject.gui.dj;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDropEvent;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -34,10 +42,14 @@ public class GUI_main extends JFrame {
 	JPanel panel_addsong = new JPanel(layout4);
 	JPanel panel_editsong = new JPanel(layout5);
 	
+	JPanel panel_drop = new JPanel(new MigLayout("insets 0 0 0 0"));
+	
 	JLabel label_songs = new JLabel();
 	JLabel label_songs2 = new JLabel();
 	JLabel label_currsong = new JLabel();
 	JLabel label_nextsong = new JLabel();
+	JLabel label_addsong = new JLabel();
+	JLabel label_dropsong = new JLabel();
 	
 	JTextField txt_currsong = new JTextField();
 	JTextField txt_nextsong = new JTextField();
@@ -49,6 +61,8 @@ public class GUI_main extends JFrame {
 	JTextField txt_genre = new JTextField();
 	JTextField txt_length = new JTextField();
 	
+	JButton btn_addsong = new JButton("Add");
+	JButton btn_resetsong = new JButton("Reset");
 	JButton btn_updatesong = new JButton("Update");
 	JButton btn_deletesong = new JButton("Delete");
 	
@@ -56,6 +70,7 @@ public class GUI_main extends JFrame {
 	SongChoosePanel song_choose2;
 
 	SongInfoPanel song_info;
+	SongInfoPanel song_info2;
 	
 	public GUI_main(ListenerHandler_main listenerHandler_main){
 		listener = listenerHandler_main;
@@ -66,14 +81,22 @@ public class GUI_main extends JFrame {
 		song_choose2 = new SongChoosePanel(listener, false);
 		
 		song_info = new SongInfoPanel(listener);
+		song_info2 = new SongInfoPanel(listener);
 		
+		panel_drop.setBorder(BorderFactory.createDashedBorder(new Color(0, 0, 0)));
+		panel_drop.setDropTarget(new PanelDropTarget(song_info2));
+				
 		label_songs.setText("Drag song:");
 		label_currsong.setText("Drop current song:");
 		label_nextsong.setText("Drop next song:");
+		label_addsong.setText("Add song:");
+		label_dropsong.setText("Or drop song:");
 				
 		label_songs2.setText("Choose song:");
 		
 		//Listener werden vergeben
+		btn_addsong.addActionListener(listener);
+		btn_resetsong.addActionListener(listener);
 		btn_updatesong.addActionListener(listener);
 		btn_deletesong.addActionListener(listener);
 		
@@ -91,14 +114,25 @@ public class GUI_main extends JFrame {
 		panel_songs.add(label_nextsong, "width 150!, height 30!, wrap");
 		panel_songs.add(txt_nextsong, "width 350!, height 30!, wrap");
 		
-		//Song ändern Panel wird bestückt
+		//Song hinzufügen Panel wird bestückt
 		JLabel dummy = new JLabel();
+		panel_addsong.add(label_addsong, "width 550!, height 30!, span 3, wrap");
+		panel_addsong.add(song_info2, "width 550!, height 220!, span 3, wrap");
+		panel_addsong.add(label_dropsong, "width 550!, height 30!, span 3, wrap");
+		panel_addsong.add(panel_drop, "width 150!, height 150!, span 1, wrap");
+		panel_addsong.add(btn_addsong, "width 150!, height 30!, span 1");
+		panel_addsong.add(dummy, "width 150!, height 30!, span 1");
+		panel_addsong.add(btn_resetsong, "width 150!, height 30!, span 1");
 		
-		panel_editsong.add(label_songs2, "width 350!, height 30!, wrap");
-		panel_editsong.add(song_choose2, "width 550!, height 180!, wrap");
-		panel_editsong.add(song_info, "width 550!, height 220!, wrap");
-//		panel_editsong.add(btn_updatesong, "width 150!, height 30!, span 1");
-//		panel_editsong.add(dummy, "width 150!, height 30!, span 1");
+		
+		//Song ändern Panel wird bestückt
+		JLabel dummy2 = new JLabel();
+		
+		panel_editsong.add(label_songs2, "width 450!, height 30!, span 3, wrap");
+		panel_editsong.add(song_choose2, "width 550!, height 180!, span 3, wrap");
+		panel_editsong.add(song_info, "width 550!, height 220!, span 3, wrap");
+		panel_editsong.add(btn_updatesong, "width 150!, height 30!, span 1");
+		panel_editsong.add(dummy2, "width 150!, height 30!, span 1");
 		panel_editsong.add(btn_deletesong, "width 150!, height 30!, span 1");
 		
 

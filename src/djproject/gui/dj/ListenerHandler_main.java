@@ -58,6 +58,9 @@ CaretListener {
 			RESTHandler.deleteSong(gui.song_info.getId());
 			gui.song_choose2.updateSongList();
 		}	
+		if(e.getSource().equals(gui.btn_resetsong)) {
+			gui.song_info2.reset();
+		}
 	}
 
 	@Override
