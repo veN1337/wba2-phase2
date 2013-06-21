@@ -22,18 +22,12 @@ public class GUI_main extends JFrame {
 	ListenerHandler_main listener;
 	RESTServer rest;
 	
-	MigLayout layout = new MigLayout();
-	MigLayout layout2 = new MigLayout();
-	MigLayout layout3 = new MigLayout();
-	MigLayout layout4 = new MigLayout();
-	MigLayout layout5 = new MigLayout();
-	
 	JTabbedPane tab_pane = new JTabbedPane();
-	JPanel panel_songs = new JPanel(layout);
-	JPanel panel_wishes = new JPanel(layout2);
-	JPanel panel_comments = new JPanel(layout3);
-	JPanel panel_addsong = new JPanel(layout4);
-	JPanel panel_editsong = new JPanel(layout5);
+	JPanel panel_songs = new JPanel(new MigLayout());
+	JPanel panel_wishes = new JPanel(new MigLayout());
+	JPanel panel_comments = new JPanel(new MigLayout());
+	JPanel panel_addsong = new JPanel(new MigLayout());
+	JPanel panel_editsong = new JPanel(new MigLayout());
 	
 	JPanel panel_drop = new JPanel(new MigLayout("insets 0 0 0 0"));
 	
@@ -43,6 +37,7 @@ public class GUI_main extends JFrame {
 	JLabel label_nextsong = new JLabel();
 	JLabel label_addsong = new JLabel();
 	JLabel label_dropsong = new JLabel();
+	JLabel label_wishes = new JLabel();
 	
 	JTextField txt_currsong = new JTextField();
 	JTextField txt_nextsong = new JTextField();
@@ -61,6 +56,7 @@ public class GUI_main extends JFrame {
 	
 	SongChoosePanel song_control_choose;
 	SongChoosePanel song_change_choose;
+	WishPanel song_wish_choose;
 
 	SongInfoPanel song_change_info;
 	SongInfoPanel song_add_info;
@@ -71,9 +67,13 @@ public class GUI_main extends JFrame {
 		rest.start();
 		
 		tab_pane.addChangeListener(listener);
+		tab_pane.setFocusable(false);
 		
 		song_control_choose = new SongChoosePanel(listener, true);
 		song_change_choose = new SongChoosePanel(listener, false);
+		song_wish_choose = new WishPanel(listener, false);
+		
+		song_wish_choose.sortByColumn(0);
 		
 		song_change_info = new SongInfoPanel(listener);
 		song_add_info = new SongInfoPanel(listener);
@@ -86,8 +86,8 @@ public class GUI_main extends JFrame {
 		label_nextsong.setText("Drop next song:");
 		label_addsong.setText("Add song:");
 		label_dropsong.setText("Or drop song:");
-				
 		label_songs2.setText("Choose song:");
+		label_wishes.setText("Wishes:");
 		
 		//Listener werden vergeben
 		btn_addsong.addActionListener(listener);
@@ -123,6 +123,10 @@ public class GUI_main extends JFrame {
 		panel_addsong.add(dummy, "width 150!, height 30!, span 1");
 		panel_addsong.add(btn_resetsong, "width 150!, height 30!, span 1");
 		
+		//Wünsche Panel wird bestückt
+		JLabel dummy3 = new JLabel();
+		panel_wishes.add(label_wishes, "width 550!, height 30!, span 3, wrap");
+		panel_wishes.add(song_wish_choose, "width 550!, height 220!, span 3, wrap");
 		
 		//Song ändern Panel wird bestückt
 		JLabel dummy2 = new JLabel();

@@ -8,6 +8,7 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 import djproject.songs.Song;
 import djproject.songs.Songs;
+import djproject.wishes.Wishes;
 
 public class RESTHandler {
 	
@@ -21,6 +22,22 @@ public class RESTHandler {
 	            .accept("application/xml")
 	            .get(ClientResponse.class);
 		return response.getEntity(Songs.class);
+	}
+	
+	public static Song getSongById(int id) {
+		WebResource service = client.resource("http://localhost/songs/"+ id);
+		ClientResponse response = service.type("application/xml")
+	            .accept("application/xml")
+	            .get(ClientResponse.class);
+		return response.getEntity(Song.class);
+	}
+	
+	public static Wishes getWishes() {
+		WebResource service = client.resource("http://localhost/wishes");
+		ClientResponse response = service.type("application/xml")
+	            .accept("application/xml")
+	            .get(ClientResponse.class);
+		return response.getEntity(Wishes.class);
 	}
 	
 	public static void updateSong(int id, Song s) {

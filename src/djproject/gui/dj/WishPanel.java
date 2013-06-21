@@ -6,14 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Vector;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
@@ -26,10 +21,11 @@ import javax.swing.table.TableModel;
 
 import djproject.rest.RESTHandler;
 import djproject.songs.Song;
+import djproject.wishes.Wish;
 
 import net.miginfocom.swing.MigLayout;
 
-public class SongChoosePanel extends JPanel {
+public class WishPanel extends JPanel {
 
 	/**
 	 * 
@@ -38,19 +34,6 @@ public class SongChoosePanel extends JPanel {
 	
 	MigLayout layout = new MigLayout("insets 0 0 0 0");
 	MigLayout layout2 = new MigLayout();
-	
-	JLabel label_filtertype = new JLabel();
-	JLabel label_filtertext = new JLabel();
-	
-	JButton btn_filter = new JButton("Filter");
-	JButton btn_filterreset = new JButton("Reset");
-	
-	JPanel panel_filter = new JPanel(layout2);
-
-	DefaultComboBoxModel<String> cboxModelFilter = new DefaultComboBoxModel<>();
-	JComboBox<String> cbox_filter = new JComboBox<String>(cboxModelFilter);
-	
-	JTextField txt_filter = new JTextField();
 	
 	DefaultTableModel tableModelSongs = new DefaultTableModel(){
 		private static final long serialVersionUID = 1L;
@@ -61,32 +44,12 @@ public class SongChoosePanel extends JPanel {
 	    }
 	};
 	JTable table_songs = new JTable(tableModelSongs);
+
+	int id;
 	
-	public SongChoosePanel(ListenerHandler_main listener, boolean dragable) {
+	public WishPanel(ListenerHandler_main listener, boolean dragable) {
 		
 		setLayout(layout);
-		
-		label_filtertype.setText("Filter by:");
-		label_filtertext.setText("Filter keyword:");
-		
-		cboxModelFilter.addElement("Artist");
-		cboxModelFilter.addElement("Title");
-		cboxModelFilter.addElement("Genre");
-		
-		JLabel dummy = new JLabel();
-		
-		panel_filter.add(label_filtertype, "width 150!, height 30!, span 3, wrap");
-		panel_filter.add(cbox_filter, "width 150!, height 30!, span 3, wrap");
-		panel_filter.add(label_filtertext, "width 150!, height 30!, span 3, wrap");
-		panel_filter.add(txt_filter, "width 150!, height 30!, span 3, wrap");
-		panel_filter.add(btn_filter, "width 65!, height 30!, span 1");
-		panel_filter.add(dummy, "width 10!, height 30!, span 1");
-		panel_filter.add(btn_filterreset, "width 65!, height 30!, span 3");
-		
-		btn_filter.addActionListener(listener);
-		btn_filterreset.addActionListener(listener);
-		txt_filter.addActionListener(listener);
-		
 		
 		table_songs.setAutoCreateRowSorter(true);
 		table_songs.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -100,33 +63,32 @@ public class SongChoosePanel extends JPanel {
 		}
 		
 		table_songs.getTableHeader().setReorderingAllowed(false);
+		table_songs.getTableHeader().setFocusable(false);
 		
-		tableModelSongs.addColumn("ID");
+		tableModelSongs.addColumn("Count");
 		tableModelSongs.addColumn("Artist");
 		tableModelSongs.addColumn("Title");
 		tableModelSongs.addColumn("Album");
-		tableModelSongs.addColumn("Album Artist");
-		tableModelSongs.addColumn("Number in Album");
 		tableModelSongs.addColumn("Genre");
 		tableModelSongs.addColumn("Length");
 		
 		updateSongList();
 		
-		this.add(new JScrollPane(table_songs), "width 350!, height 180!");
-		this.add(panel_filter, "width 200!, height 180!");
+		this.add(new JScrollPane(table_songs), "width 530!, height 180!");
 
 	}
 	
 	public void updateSongList() {
 		tableModelSongs.getDataVector().removeAllElements();
-		for(Song s: RESTHandler.getSongs(String.valueOf(cbox_filter.getSelectedItem()), txt_filter.getText()).getSong()) {
+		for(Wish w: RESTHandler.getWishes().getWish()) {
 			Vector<String> v = new Vector<String>();
-			v.add(String.valueOf(s.getId()));
+			id = w.getId();
+			v.add(String.valueOf(w.getCount()));
+			int sId = w.getSongId();
+			Song s = RESTHandler.getSongById(sId);
 			v.add(s.getArtist());
 			v.add(s.getTitle());
 			v.add(s.getAlbum());
-			v.add(s.getAlbumArtist());			
-			v.add((s.getNumberInAlbum() == null) ? "" : String.valueOf(s.getNumberInAlbum()));
 			v.add(s.getGenre());
 			Format formatter = new SimpleDateFormat( "mm:ss" );
 			v.add(String.valueOf(formatter.format((s.getLength()*1000))));
@@ -181,3 +143,4 @@ public class SongChoosePanel extends JPanel {
 	}
 
 }
+
