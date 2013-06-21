@@ -59,25 +59,27 @@ public class GUI_main extends JFrame {
 	JButton btn_updatesong = new JButton("Update");
 	JButton btn_deletesong = new JButton("Delete");
 	
-	SongChoosePanel song_choose1;
-	SongChoosePanel song_choose2;
+	SongChoosePanel song_control_choose;
+	SongChoosePanel song_change_choose;
 
-	SongInfoPanel song_info;
-	SongInfoPanel song_info2;
+	SongInfoPanel song_change_info;
+	SongInfoPanel song_add_info;
 	
 	public GUI_main(ListenerHandler_main listenerHandler_main){
 		listener = listenerHandler_main;
 		rest = new RESTServer();
 		rest.start();
 		
-		song_choose1 = new SongChoosePanel(listener, true);
-		song_choose2 = new SongChoosePanel(listener, false);
+		tab_pane.addChangeListener(listener);
 		
-		song_info = new SongInfoPanel(listener);
-		song_info2 = new SongInfoPanel(listener);
+		song_control_choose = new SongChoosePanel(listener, true);
+		song_change_choose = new SongChoosePanel(listener, false);
+		
+		song_change_info = new SongInfoPanel(listener);
+		song_add_info = new SongInfoPanel(listener);
 		
 		panel_drop.setBorder(BorderFactory.createDashedBorder(new Color(0, 0, 0)));
-		panel_drop.setDropTarget(new PanelDropTarget(song_info2));
+		panel_drop.setDropTarget(new PanelDropTarget(this));
 				
 		label_songs.setText("Drag song:");
 		label_currsong.setText("Drop current song:");
@@ -93,6 +95,10 @@ public class GUI_main extends JFrame {
 		btn_updatesong.addActionListener(listener);
 		btn_deletesong.addActionListener(listener);
 		
+		btn_addsong.setEnabled(false);
+		btn_updatesong.setEnabled(false);
+		btn_deletesong.setEnabled(false);
+		
 		txt_currsong.setEditable(false);
 		txt_nextsong.setEditable(false);
 		
@@ -101,7 +107,7 @@ public class GUI_main extends JFrame {
 		
 		//Song Control Panel wird bestückt
 		panel_songs.add(label_songs, "width 350!, height 30!, wrap");
-		panel_songs.add(song_choose1, "width 550!, height 180!, wrap");
+		panel_songs.add(song_control_choose, "width 550!, height 180!, wrap");
 		panel_songs.add(label_currsong, "width 150!, height 30!, wrap");
 		panel_songs.add(txt_currsong, "width 350!, height 30!, wrap");
 		panel_songs.add(label_nextsong, "width 150!, height 30!, wrap");
@@ -110,7 +116,7 @@ public class GUI_main extends JFrame {
 		//Song hinzufügen Panel wird bestückt
 		JLabel dummy = new JLabel();
 		panel_addsong.add(label_addsong, "width 550!, height 30!, span 3, wrap");
-		panel_addsong.add(song_info2, "width 550!, height 220!, span 3, wrap");
+		panel_addsong.add(song_add_info, "width 550!, height 220!, span 3, wrap");
 		panel_addsong.add(label_dropsong, "width 550!, height 30!, span 3, wrap");
 		panel_addsong.add(panel_drop, "width 150!, height 150!, span 1, wrap");
 		panel_addsong.add(btn_addsong, "width 150!, height 30!, span 1");
@@ -122,8 +128,8 @@ public class GUI_main extends JFrame {
 		JLabel dummy2 = new JLabel();
 		
 		panel_editsong.add(label_songs2, "width 450!, height 30!, span 3, wrap");
-		panel_editsong.add(song_choose2, "width 550!, height 180!, span 3, wrap");
-		panel_editsong.add(song_info, "width 550!, height 220!, span 3, wrap");
+		panel_editsong.add(song_change_choose, "width 550!, height 180!, span 3, wrap");
+		panel_editsong.add(song_change_info, "width 550!, height 220!, span 3, wrap");
 		panel_editsong.add(btn_updatesong, "width 150!, height 30!, span 1");
 		panel_editsong.add(dummy2, "width 150!, height 30!, span 1");
 		panel_editsong.add(btn_deletesong, "width 150!, height 30!, span 1");

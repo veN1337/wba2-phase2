@@ -18,7 +18,7 @@ public class TableTransferHandler extends TransferHandler {
 	
 	@Override
     public boolean canImport(TransferSupport support) {
-        return (support.getComponent() instanceof JTextField) && support.isDataFlavorSupported(ListTransferable.LIST_ITEM_DATA_FLAVOR);
+        return (support.getComponent() instanceof JTextField) && support.isDataFlavorSupported(TableTransferable.TABLE_ITEM_DATA_FLAVOR);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class TableTransferHandler extends TransferHandler {
         if (canImport(support)) {
             try {
                 Transferable t = support.getTransferable();
-                Object value = t.getTransferData(ListTransferable.LIST_ITEM_DATA_FLAVOR);
+                Object value = t.getTransferData(TableTransferable.TABLE_ITEM_DATA_FLAVOR);
                 if (value instanceof String) {
                     Component component = support.getComponent();
                     if (component instanceof JTextField) {
@@ -57,7 +57,7 @@ public class TableTransferHandler extends TransferHandler {
             	for(int i=0; i < 3; i++) {
             		li = li + (String) table.getValueAt((Integer) value, i) + " - ";
             	}
-                t = new ListTransferable(li.substring(0, li.length()-3));
+                t = new TableTransferable(li.substring(0, li.length()-3));
             }
         }
         return t;
@@ -65,7 +65,6 @@ public class TableTransferHandler extends TransferHandler {
 
     @Override
     protected void exportDone(JComponent source, Transferable data, int action) {
-        System.out.println("DragAndDropDone");
         // Here you need to decide how to handle the completion of the transfer,
         // should you remove the item from the list or not...
     }

@@ -34,7 +34,7 @@ public class SongInfoPanel extends JPanel {
 	JLabel label_length = new JLabel();
 	JLabel label_cover = new JLabel();
 	
-	private int id = 0;
+	private int id = -1;
 	
 	public SongInfoPanel(ListenerHandler_main listener) {
 		
@@ -48,6 +48,11 @@ public class SongInfoPanel extends JPanel {
 		label_genre.setText("Genre");
 		label_length.setText("Length");
 		label_cover.setText("Cover");
+		
+		txt_artist.addKeyListener(listener);
+		txt_title.addKeyListener(listener);
+		txt_genre.addKeyListener(listener);
+		txt_length.addKeyListener(listener);
 		
 		JPanel cover = new JPanel();
 		
@@ -69,8 +74,7 @@ public class SongInfoPanel extends JPanel {
 		add(label_cover, "width 150!, height 30!, span 1, wrap");
 		add(txt_length, "width 150!, height 30!, span 1");
 		add(cover, "width 30!, height 30!, span 1");
-		
-		
+
 	}
 	
 	public void setSong(Vector<String> song) {
@@ -91,6 +95,7 @@ public class SongInfoPanel extends JPanel {
 	}
 
 	public void reset() {
+		id = -1;
 		txt_artist.setText("");
 		txt_title.setText("");
 	    txt_album.setText("");

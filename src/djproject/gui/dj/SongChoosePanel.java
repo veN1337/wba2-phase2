@@ -118,7 +118,8 @@ public class SongChoosePanel extends JPanel {
 			v.add(s.getTitle());
 			v.add(s.getAlbum());
 			v.add(s.getAlbumArtist());
-			v.add(String.valueOf(s.getNumberInAlbum()));
+			
+			v.add((s.getNumberInAlbum() == null) ? "" : String.valueOf(s.getNumberInAlbum()));
 			v.add(s.getGenre());
 			Format formatter = new SimpleDateFormat( "mm:ss" );
 			v.add(String.valueOf(formatter.format((s.getLength()*1000))));

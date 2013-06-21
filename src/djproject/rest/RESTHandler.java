@@ -36,4 +36,12 @@ public class RESTHandler {
 		service.type("application/xml").delete();
 	}
 	
+	public static void addSong(Song s) {
+		WebResource service = client.resource("http://localhost/songs/");
+		service.type("application/xml")
+	            .accept("application/xml")
+	            .entity(s)
+	            .post();
+	}
+	
 }
