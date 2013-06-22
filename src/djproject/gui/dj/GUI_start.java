@@ -50,8 +50,8 @@ public class GUI_start extends JFrame implements ActionListener{
 		label_dj.setText("DJ Name:");
 				
 		//DJ Panel wird bestückt
-		panel_start.add(label_event, "width 300!, height 30!, span 3, wrap");
-		panel_start.add(txt_event, "width 300!, height 30!, span 3, wrap");
+//		panel_start.add(label_event, "width 300!, height 30!, span 3, wrap");
+//		panel_start.add(txt_event, "width 300!, height 30!, span 3, wrap");
 		panel_start.add(label_dj, "width 300!, height 30!, span 3, wrap,");
 		panel_start.add(txt_dj, "width 300!, height 30!, span 3, wrap");
 		panel_start.add(btn_ok, "width 100!,height 30!, span 1");
@@ -63,7 +63,7 @@ public class GUI_start extends JFrame implements ActionListener{
 		add(panel_start);
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(new Dimension(320,220));
+		setSize(new Dimension(320,160));
 		setResizable(false);
 		setVisible(true);
 		setTitle("DJ System - DJ Client");		

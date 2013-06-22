@@ -44,46 +44,46 @@ public class NodeCreation {
  
         System.out.println("Creating or open nodes");
         LeafNode leaf = null;
-		try {
-			ConfigureForm form = new ConfigureForm(FormType.submit);
-		    form.setAccessModel(AccessModel.open);
-		    form.setDeliverPayloads(true);
-		    form.setPersistentItems(false);
-		    form.setPublishModel(PublishModel.open);
-		    form.setNodeType(NodeType.collection);
-		    form.setTitle("test1");
-		     	
-		    boolean exists[] = checkNodes("test1", "test2");
-		    
-		    // Create the collection node
-		    if(!exists[0]) {
-		    	CollectionNode col = (CollectionNode) mgr.createNode("test1", form);
-		    } else {
-		    	// Get the collection node
-		    	CollectionNode col = mgr.getNode("test1");
-		    }
-		      
-		    // Create the leaf node
-		    if(!exists[1]) {
-				form.setCollection("test1");
-				form.setNodeType(NodeType.leaf);
-				form.setTitle("test2");
-				leaf = (LeafNode) mgr.createNode("test2", form);
-//				form.setTitle("test3");
-//				leaf = (LeafNode) mgr.createNode("test3", form);
-//				form.setTitle("test4");
-//				leaf = (LeafNode) mgr.createNode("test4", form);
-//				form.setTitle("test5");
-//				leaf = (LeafNode) mgr.createNode("test5", form);
-//				form.setTitle("test6");
-//				leaf = (LeafNode) mgr.createNode("test6", form);
-		    } else {
-		      	leaf = mgr.getNode("test2");
-		    }
-			
-		} catch (XMPPException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			ConfigureForm form = new ConfigureForm(FormType.submit);
+//		    form.setAccessModel(AccessModel.open);
+//		    form.setDeliverPayloads(true);
+//		    form.setPersistentItems(false);
+//		    form.setPublishModel(PublishModel.open);
+//		    form.setNodeType(NodeType.collection);
+//		    form.setTitle("Event 1");
+//		     	
+//		    boolean exists[] = checkNodes("Event 1", "test2");
+//		    
+//		    // Create the collection node
+//		    if(!exists[0]) {
+//		    	CollectionNode col = (CollectionNode) mgr.createNode("test1", form);
+//		    } else {
+//		    	// Get the collection node
+//		    	CollectionNode col = mgr.getNode("Event 1");
+//		    }
+//		      
+//		    // Create the leaf node
+//		    if(!exists[1]) {
+//				form.setCollection("Event 1");
+//				form.setNodeType(NodeType.leaf);
+//				form.setTitle("test2");
+//				leaf = (LeafNode) mgr.createNode("test2", form);
+////				form.setTitle("test3");
+////				leaf = (LeafNode) mgr.createNode("test3", form);
+////				form.setTitle("test4");
+////				leaf = (LeafNode) mgr.createNode("test4", form);
+////				form.setTitle("test5");
+////				leaf = (LeafNode) mgr.createNode("test5", form);
+////				form.setTitle("test6");
+////				leaf = (LeafNode) mgr.createNode("test6", form);
+//		    } else {
+//		      	leaf = mgr.getNode("test2");
+//		    }
+//			
+//		} catch (XMPPException e) {
+//			e.printStackTrace();
+//		}
 		
 		String input = "";
 		Scanner scanner = new Scanner(System.in);
@@ -97,7 +97,7 @@ public class NodeCreation {
 
 	        PayloadItem<SimplePayload> item = new PayloadItem<SimplePayload>("test", payload);
 	        
-	        leaf.publish(item);
+	        //leaf.publish(item);
 
 		}
         
@@ -107,11 +107,9 @@ public class NodeCreation {
         System.out.println("Disconneting");
         try {
         	mgr.deleteNode("test1");
-        	mgr.deleteNode("test2");
-//        	mgr.deleteNode("test3");
-//        	mgr.deleteNode("test4");
-//        	mgr.deleteNode("test5");
-//        	mgr.deleteNode("test6");
+        	mgr.deleteNode("DJ 1");
+        	mgr.deleteNode("DJ 2");
+        	mgr.deleteNode("DJ 3");
         	
 		} catch (XMPPException e) {
 			e.printStackTrace();

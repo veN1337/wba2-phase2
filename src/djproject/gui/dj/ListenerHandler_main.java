@@ -16,6 +16,8 @@ import javax.swing.event.CaretListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.jivesoftware.smackx.pubsub.LeafNode;
+
 import djproject.rest.RESTHandler;
 import djproject.songs.ObjectFactory;
 import djproject.songs.Song;
@@ -24,9 +26,14 @@ public class ListenerHandler_main extends MouseMotionAdapter implements
 MouseListener, KeyListener, ActionListener, ChangeListener,
 CaretListener {
 	
-	GUI_main gui = new GUI_main(this);
+	GUI_main gui;
+//	NodeHandler nh;
+//	LeafNode node;
 	
-	public ListenerHandler_main(){
+	public ListenerHandler_main(NodeHandler nh, LeafNode node){
+		gui = new GUI_main(this, nh, node);
+//		this.nh = nh;
+//		this.node = node;
 	}
 
 	@Override

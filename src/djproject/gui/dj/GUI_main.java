@@ -10,6 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+
+import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smackx.pubsub.LeafNode;
+
 import djproject.rest.RESTServer;
 import net.miginfocom.swing.MigLayout;
 
@@ -65,10 +69,16 @@ public class GUI_main extends JFrame {
 	SongInfoPanel song_change_info;
 	SongInfoPanel song_add_info;
 	
-	public GUI_main(ListenerHandler_main listenerHandler_main){
+	NodeHandler nh;
+	LeafNode node;
+	
+	public GUI_main(ListenerHandler_main listenerHandler_main, NodeHandler nh, LeafNode node){
 		listener = listenerHandler_main;
 		rest = new RESTServer();
 		rest.start();
+		
+		this.nh = nh;
+		this.node = node;
 		
 		tab_pane.addChangeListener(listener);
 		tab_pane.setFocusable(false);
@@ -174,6 +184,11 @@ public class GUI_main extends JFrame {
 	public void processWindowEvent(WindowEvent e) {
 	    if (e.getID() == WindowEvent.WINDOW_CLOSING) {
 	        rest.stop();
+	        try {
+				nh.deleteNode(node);
+			} catch (XMPPException e1) {
+				System.out.println("not logged in");
+			}
 	        dispose();
 	    }
 	}
