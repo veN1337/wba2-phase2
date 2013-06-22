@@ -7,6 +7,7 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 import djproject.comments.Comments;
+import djproject.song_history.Nowandnext;
 import djproject.songs.Song;
 import djproject.songs.Songs;
 import djproject.wishes.Wishes;
@@ -80,6 +81,14 @@ public class RESTHandler {
 	public static void deleteComment(int id) {
 		WebResource service = client.resource(host + "/wishes/" + String.valueOf(id));
 		service.type("application/xml").delete();
+	}
+	
+	public static void updateHistory(Nowandnext nn) {
+		WebResource service = client.resource(host + "/history/");
+		service.type("application/xml")
+	            .accept("application/xml")
+	            .entity(nn)
+	            .put();
 	}
 	
 }

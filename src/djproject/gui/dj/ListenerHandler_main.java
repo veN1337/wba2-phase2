@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
+import java.util.GregorianCalendar;
 import java.util.Vector;
 
 import javax.swing.JOptionPane;
@@ -15,16 +16,24 @@ import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.jivesoftware.smackx.pubsub.LeafNode;
 
 import djproject.rest.RESTHandler;
+import djproject.song_history.Next;
+import djproject.song_history.Now;
+import djproject.song_history.Nowandnext;
 import djproject.songs.ObjectFactory;
 import djproject.songs.Song;
 
 public class ListenerHandler_main extends MouseMotionAdapter implements
 MouseListener, KeyListener, ActionListener, ChangeListener,
-CaretListener {
+CaretListener, DocumentListener {
 	
 	GUI_main gui;
 //	NodeHandler nh;
@@ -39,7 +48,7 @@ CaretListener {
 	@Override
 	public void caretUpdate(CaretEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -156,7 +165,36 @@ CaretListener {
 			RESTHandler.deleteComment(gui.comment_choose.getId());
 			gui.comment_choose.updateCommentList();
 			gui.btn_deletecomment.setEnabled(false);
-		}	
+		}
+		if(e.getSource().equals(gui.btn_updatehistory)) {
+			Nowandnext nn = new Nowandnext();
+			nn.setNow(new Now());
+			nn.setNext(new Next());
+			nn.getNow().setSong(new djproject.song_history.Song());
+			nn.getNext().setSong(new djproject.song_history.Song());
+			
+			
+			try {
+				GregorianCalendar gregorianCalendar = new GregorianCalendar();
+		        DatatypeFactory datatypeFactory = DatatypeFactory.newInstance();
+				XMLGregorianCalendar now = datatypeFactory.newXMLGregorianCalendar(gregorianCalendar);
+				
+				nn.getNow().getSong().setSongId(Integer.parseInt(gui.txt_currsong.getText().split(" - ")[0]));
+				nn.getNow().getSong().setTimePlayedAt(now);
+				
+				nn.getNext().getSong().setSongId(Integer.parseInt(gui.txt_nextsong.getText().split(" - ")[0]));
+				nn.getNext().getSong().setTimePlayedAt(now);
+				
+				RESTHandler.updateHistory(nn);
+				
+			} catch (DatatypeConfigurationException e1) {
+				e1.printStackTrace();
+			}        
+
+			gui.txt_currsong.setText("");
+			gui.txt_nextsong.setText("");
+			gui.btn_updatehistory.setEnabled(false);
+		}
 	}
 
 	@Override
@@ -222,6 +260,29 @@ CaretListener {
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void changedUpdate(DocumentEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void insertUpdate(DocumentEvent e) {
+		// TODO Auto-generated method stub
+		if( (e.getDocument().getProperty("parent") == gui.txt_currsong) || (e.getDocument().getProperty("parent") == gui.txt_nextsong) ) {
+			if(gui.txt_currsong.getText().length() > 0 && gui.txt_nextsong.getText().length() > 0)
+			gui.btn_updatehistory.setEnabled(true);
+		} else if(e.getDocument().getProperty("parent") == gui.txt_nextsong) {
+			gui.btn_updatehistory.setEnabled(false);
+		}
+	}
+
+	@Override
+	public void removeUpdate(DocumentEvent e) {
 		// TODO Auto-generated method stub
 		
 	}

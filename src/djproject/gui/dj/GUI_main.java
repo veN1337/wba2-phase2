@@ -60,6 +60,7 @@ public class GUI_main extends JFrame {
 	JButton btn_deletesong = new JButton("Delete");
 	JButton btn_deletewish = new JButton("Delete");
 	JButton btn_deletecomment = new JButton("Delete");
+	JButton btn_updatehistory = new JButton("Update History");
 	
 	SongChoosePanel song_control_choose;
 	SongChoosePanel song_change_choose;
@@ -113,18 +114,25 @@ public class GUI_main extends JFrame {
 		btn_deletesong.addActionListener(listener);
 		btn_deletewish.addActionListener(listener);
 		btn_deletecomment.addActionListener(listener);
+		btn_updatehistory.addActionListener(listener);
 		
 		btn_addsong.setEnabled(false);
 		btn_updatesong.setEnabled(false);
 		btn_deletesong.setEnabled(false);
 		btn_deletewish.setEnabled(false);
 		btn_deletecomment.setEnabled(false);
+		btn_updatehistory.setEnabled(false);
 		
 		txt_currsong.setEditable(false);
 		txt_nextsong.setEditable(false);
 		
 		txt_currsong.setTransferHandler(new TableTransferHandler());
 		txt_nextsong.setTransferHandler(new TableTransferHandler());
+		
+		txt_currsong.getDocument().addDocumentListener(listener);
+		txt_currsong.getDocument().putProperty("parent", txt_currsong);
+		txt_nextsong.getDocument().addDocumentListener(listener);
+		txt_nextsong.getDocument().putProperty("parent", txt_nextsong);
 		
 		//Song Control Panel wird bestückt
 		panel_songs.add(label_songs, "width 350!, height 30!, wrap");
@@ -133,6 +141,7 @@ public class GUI_main extends JFrame {
 		panel_songs.add(txt_currsong, "width 350!, height 30!, wrap");
 		panel_songs.add(label_nextsong, "width 150!, height 30!, wrap");
 		panel_songs.add(txt_nextsong, "width 350!, height 30!, wrap");
+		panel_songs.add(btn_updatehistory, "width 150!, height 30!");
 		
 		//Song hinzufügen Panel wird bestückt
 		JLabel dummy = new JLabel();

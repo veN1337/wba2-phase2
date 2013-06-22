@@ -1,21 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<history xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="xsd/song_history.xsd">
-  <song>
-    <song_id>0</song_id>
-    <time_played_at>2001-12-31T12:00:00</time_played_at>
-  </song>
-  <nowandnext>
-    <now>
-      <song>
-        <song_id>3</song_id>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<history>
+    <song>
+        <song_id>0</song_id>
         <time_played_at>2001-12-31T12:00:00</time_played_at>
-      </song>
-    </now>
-    <next>
-      <song>
-        <song_id>2</song_id>
-        <time_played_at>2001-12-31T12:00:00</time_played_at>
-      </song>
-    </next>
-  </nowandnext>
+    </song>
+    <nowandnext>
+        <now>
+            <song>
+                <song_id>1</song_id>
+                <time_played_at>2013-06-22T20:50:50.918+02:00</time_played_at>
+            </song>
+        </now>
+        <next>
+            <song>
+                <song_id>2</song_id>
+                <time_played_at>2013-06-22T20:50:50.918+02:00</time_played_at>
+            </song>
+        </next>
+    </nowandnext>
 </history>
