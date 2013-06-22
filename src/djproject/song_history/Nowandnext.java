@@ -12,9 +12,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -27,8 +25,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{}song_id"/>
- *         &lt;element ref="{}time_played_at"/>
+ *         &lt;element ref="{}now"/>
+ *         &lt;element ref="{}next"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -39,56 +37,63 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "songId",
-    "timePlayedAt"
+    "now",
+    "next"
 })
-@XmlRootElement(name = "song")
-public class Song {
+@XmlRootElement(name = "nowandnext")
+public class Nowandnext {
 
-    @XmlElement(name = "song_id")
-    protected int songId;
-    @XmlElement(name = "time_played_at", required = true)
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar timePlayedAt;
-
-    /**
-     * Ruft den Wert der songId-Eigenschaft ab.
-     * 
-     */
-    public int getSongId() {
-        return songId;
-    }
+    @XmlElement(required = true)
+    protected Now now;
+    @XmlElement(required = true)
+    protected Next next;
 
     /**
-     * Legt den Wert der songId-Eigenschaft fest.
-     * 
-     */
-    public void setSongId(int value) {
-        this.songId = value;
-    }
-
-    /**
-     * Ruft den Wert der timePlayedAt-Eigenschaft ab.
+     * Ruft den Wert der now-Eigenschaft ab.
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Now }
      *     
      */
-    public XMLGregorianCalendar getTimePlayedAt() {
-        return timePlayedAt;
+    public Now getNow() {
+        return now;
     }
 
     /**
-     * Legt den Wert der timePlayedAt-Eigenschaft fest.
+     * Legt den Wert der now-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Now }
      *     
      */
-    public void setTimePlayedAt(XMLGregorianCalendar value) {
-        this.timePlayedAt = value;
+    public void setNow(Now value) {
+        this.now = value;
+    }
+
+    /**
+     * Ruft den Wert der next-Eigenschaft ab.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Next }
+     *     
+     */
+    public Next getNext() {
+        return next;
+    }
+
+    /**
+     * Legt den Wert der next-Eigenschaft fest.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Next }
+     *     
+     */
+    public void setNext(Next value) {
+        this.next = value;
     }
 
 }

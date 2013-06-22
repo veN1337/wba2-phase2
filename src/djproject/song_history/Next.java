@@ -12,9 +12,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
@@ -27,8 +25,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{}song_id"/>
- *         &lt;element ref="{}time_played_at"/>
+ *         &lt;element ref="{}song"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -39,56 +36,36 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "songId",
-    "timePlayedAt"
+    "song"
 })
-@XmlRootElement(name = "song")
-public class Song {
+@XmlRootElement(name = "next")
+public class Next {
 
-    @XmlElement(name = "song_id")
-    protected int songId;
-    @XmlElement(name = "time_played_at", required = true)
-    @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar timePlayedAt;
+    @XmlElement(required = true)
+    protected Song song;
 
     /**
-     * Ruft den Wert der songId-Eigenschaft ab.
-     * 
-     */
-    public int getSongId() {
-        return songId;
-    }
-
-    /**
-     * Legt den Wert der songId-Eigenschaft fest.
-     * 
-     */
-    public void setSongId(int value) {
-        this.songId = value;
-    }
-
-    /**
-     * Ruft den Wert der timePlayedAt-Eigenschaft ab.
+     * Ruft den Wert der song-Eigenschaft ab.
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Song }
      *     
      */
-    public XMLGregorianCalendar getTimePlayedAt() {
-        return timePlayedAt;
+    public Song getSong() {
+        return song;
     }
 
     /**
-     * Legt den Wert der timePlayedAt-Eigenschaft fest.
+     * Legt den Wert der song-Eigenschaft fest.
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Song }
      *     
      */
-    public void setTimePlayedAt(XMLGregorianCalendar value) {
-        this.timePlayedAt = value;
+    public void setSong(Song value) {
+        this.song = value;
     }
 
 }

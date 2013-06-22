@@ -20,9 +20,33 @@
     <xs:element name="song">
     	<xs:complexType>
     		<xs:sequence>
-    			<xs:element ref="id" maxOccurs="1" minOccurs="1"></xs:element>
     			<xs:element ref="song_id" maxOccurs="1" minOccurs="1"></xs:element>
     			<xs:element ref="time_played_at" maxOccurs="1" minOccurs="1"></xs:element>
+    		</xs:sequence>
+    	</xs:complexType>
+    </xs:element>
+    
+    <xs:element name="now">
+    	<xs:complexType>
+    		<xs:sequence>
+    			<xs:element ref="song" maxOccurs="1" minOccurs="1"></xs:element>
+    		</xs:sequence>
+    	</xs:complexType>
+    </xs:element>
+    
+    <xs:element name="next">
+    	<xs:complexType>
+    		<xs:sequence>
+    			<xs:element ref="song" maxOccurs="1" minOccurs="1"></xs:element>
+    		</xs:sequence>
+    	</xs:complexType>
+    </xs:element>
+        
+    <xs:element name="nowandnext">
+    	<xs:complexType>
+    		<xs:sequence>
+    			<xs:element ref="now" maxOccurs="1" minOccurs="1"></xs:element>
+    			<xs:element ref="next" maxOccurs="1" minOccurs="1"></xs:element>
     		</xs:sequence>
     	</xs:complexType>
     </xs:element>
@@ -31,9 +55,9 @@
     	<xs:complexType>
     		<xs:sequence>
     			<xs:element ref="song" maxOccurs="unbounded" minOccurs="0"></xs:element>
+    			<xs:element ref="nowandnext" maxOccurs="1" minOccurs="1"></xs:element>
     		</xs:sequence>
     	</xs:complexType>
     </xs:element>
-
 
 </xs:schema>
