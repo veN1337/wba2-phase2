@@ -2,7 +2,7 @@
 // Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.2.6 generiert 
 // Siehe <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
-// Generiert: 2013.06.22 um 07:30:59 PM CEST 
+// Generiert: 2013.06.22 um 07:58:22 PM CEST 
 //
 
 
@@ -44,11 +44,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link History }
+     * 
+     */
+    public History createHistory() {
+        return new History();
+    }
+
+    /**
      * Create an instance of {@link Song }
      * 
      */
     public Song createSong() {
         return new Song();
+    }
+
+    /**
+     * Create an instance of {@link Nowandnext }
+     * 
+     */
+    public Nowandnext createNowandnext() {
+        return new Nowandnext();
     }
 
     /**
@@ -65,22 +81,6 @@ public class ObjectFactory {
      */
     public Next createNext() {
         return new Next();
-    }
-
-    /**
-     * Create an instance of {@link Nowandnext }
-     * 
-     */
-    public Nowandnext createNowandnext() {
-        return new Nowandnext();
-    }
-
-    /**
-     * Create an instance of {@link List }
-     * 
-     */
-    public List createList() {
-        return new List();
     }
 
     /**

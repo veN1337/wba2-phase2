@@ -2,13 +2,14 @@
 // Diese Datei wurde mit der JavaTM Architecture for XML Binding(JAXB) Reference Implementation, v2.2.6 generiert 
 // Siehe <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Änderungen an dieser Datei gehen bei einer Neukompilierung des Quellschemas verloren. 
-// Generiert: 2013.06.22 um 07:30:59 PM CEST 
+// Generiert: 2013.06.22 um 07:58:22 PM CEST 
 //
 
 
 package djproject.song_history;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -41,10 +42,10 @@ import javax.xml.bind.annotation.XmlType;
     "song",
     "nowandnext"
 })
-@XmlRootElement(name = "list")
-public class List {
+@XmlRootElement(name = "history")
+public class History {
 
-    protected java.util.List<Song> song;
+    protected List<Song> song;
     @XmlElement(required = true)
     protected Nowandnext nowandnext;
 
@@ -70,7 +71,7 @@ public class List {
      * 
      * 
      */
-    public java.util.List<Song> getSong() {
+    public List<Song> getSong() {
         if (song == null) {
             song = new ArrayList<Song>();
         }
