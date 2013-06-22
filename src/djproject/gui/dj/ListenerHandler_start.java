@@ -45,7 +45,7 @@ CaretListener {
 			//subscribtion methode
 		}
 		if(e.getSource().equals(gui.btn_ok)){
-			ListenerHandler_main listener_main = new ListenerHandler_main();
+			new ListenerHandler_main();
 			gui.dispose();
 			//subscribtion methode
 		}

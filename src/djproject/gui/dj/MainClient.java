@@ -3,8 +3,6 @@ package djproject.gui.dj;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
-import djproject.xmpp.Subscriber;
-
 public class MainClient {
 	public static void main(String[] args) {
 			try {
@@ -18,6 +16,6 @@ public class MainClient {
 	            // If Nimbus is not available, you can set the GUI to another look
 	            // and feel.
 	        }
-			ListenerHandler_start listener = new ListenerHandler_start();
+			new ListenerHandler_start();
 	}
 }
