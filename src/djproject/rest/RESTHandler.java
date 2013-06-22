@@ -6,6 +6,7 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
+import djproject.comments.Comments;
 import djproject.songs.Song;
 import djproject.songs.Songs;
 import djproject.wishes.Wishes;
@@ -64,6 +65,19 @@ public class RESTHandler {
 	}
 
 	public static void deleteWish(int id) {
+		WebResource service = client.resource(host + "/wishes/" + String.valueOf(id));
+		service.type("application/xml").delete();
+	}
+
+	public static Comments getComments() {
+		WebResource service = client.resource(host + "/comments");
+		ClientResponse response = service.type("application/xml")
+	            .accept("application/xml")
+	            .get(ClientResponse.class);
+		return response.getEntity(Comments.class);
+	}
+
+	public static void deleteComment(int id) {
 		WebResource service = client.resource(host + "/wishes/" + String.valueOf(id));
 		service.type("application/xml").delete();
 	}

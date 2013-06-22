@@ -38,6 +38,7 @@ public class GUI_main extends JFrame {
 	JLabel label_addsong = new JLabel();
 	JLabel label_dropsong = new JLabel();
 	JLabel label_wishes = new JLabel();
+	JLabel label_comments = new JLabel();
 	
 	JTextField txt_currsong = new JTextField();
 	JTextField txt_nextsong = new JTextField();
@@ -54,10 +55,12 @@ public class GUI_main extends JFrame {
 	JButton btn_updatesong = new JButton("Update");
 	JButton btn_deletesong = new JButton("Delete");
 	JButton btn_deletewish = new JButton("Delete");
+	JButton btn_deletecomment = new JButton("Delete");
 	
 	SongChoosePanel song_control_choose;
 	SongChoosePanel song_change_choose;
 	WishPanel wish_choose;
+	CommentPanel comment_choose;
 
 	SongInfoPanel song_change_info;
 	SongInfoPanel song_add_info;
@@ -72,9 +75,11 @@ public class GUI_main extends JFrame {
 		
 		song_control_choose = new SongChoosePanel(listener, true);
 		song_change_choose = new SongChoosePanel(listener, false);
-		wish_choose = new WishPanel(listener, false);
+		wish_choose = new WishPanel(listener);
+		comment_choose = new CommentPanel(listener);
 		
 		wish_choose.sortByColumn(0);
+		comment_choose.sortByColumn(3);
 		
 		song_change_info = new SongInfoPanel(listener);
 		song_add_info = new SongInfoPanel(listener);
@@ -89,6 +94,7 @@ public class GUI_main extends JFrame {
 		label_dropsong.setText("Or drop song:");
 		label_songs2.setText("Choose song:");
 		label_wishes.setText("Wishes:");
+		label_comments.setText("Comments:");
 		
 		//Listener werden vergeben
 		btn_addsong.addActionListener(listener);
@@ -96,12 +102,13 @@ public class GUI_main extends JFrame {
 		btn_updatesong.addActionListener(listener);
 		btn_deletesong.addActionListener(listener);
 		btn_deletewish.addActionListener(listener);
-		
+		btn_deletecomment.addActionListener(listener);
 		
 		btn_addsong.setEnabled(false);
 		btn_updatesong.setEnabled(false);
 		btn_deletesong.setEnabled(false);
 		btn_deletewish.setEnabled(false);
+		btn_deletecomment.setEnabled(false);
 		
 		txt_currsong.setEditable(false);
 		txt_nextsong.setEditable(false);
@@ -131,6 +138,11 @@ public class GUI_main extends JFrame {
 		panel_wishes.add(label_wishes, "width 550!, height 30!, span 3, wrap");
 		panel_wishes.add(wish_choose, "width 550!, height 180!, span 3, wrap");
 		panel_wishes.add(btn_deletewish, "width 150!, height 30!, span 1");
+				
+		//Wünsche Panel wird bestückt
+		panel_comments.add(label_comments, "width 550!, height 30!, span 3, wrap");
+		panel_comments.add(comment_choose, "width 550!, height 180!, span 3, wrap");
+		panel_comments.add(btn_deletecomment, "width 150!, height 30!, span 1");
 		
 		//Song ändern Panel wird bestückt
 		JLabel dummy2 = new JLabel();

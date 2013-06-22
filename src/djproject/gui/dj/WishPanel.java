@@ -35,7 +35,7 @@ public class WishPanel extends JPanel {
 	MigLayout layout = new MigLayout("insets 0 0 0 0");
 	MigLayout layout2 = new MigLayout();
 	
-	DefaultTableModel tableModelSongs = new DefaultTableModel(){
+	DefaultTableModel tableModelWishes = new DefaultTableModel(){
 		private static final long serialVersionUID = 1L;
 		@Override
 	    public boolean isCellEditable(int row, int column) {
@@ -43,44 +43,39 @@ public class WishPanel extends JPanel {
 	       return false;
 	    }
 	};
-	JTable table_songs = new JTable(tableModelSongs);
+	JTable table_wishes = new JTable(tableModelWishes);
 
 	private int id;
 	
-	public WishPanel(ListenerHandler_main listener, boolean dragable) {
+	public WishPanel(ListenerHandler_main listener) {
 		
 		setLayout(layout);
 		
-		table_songs.setAutoCreateRowSorter(true);
-		table_songs.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table_songs.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table_wishes.setAutoCreateRowSorter(true);
+		table_wishes.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table_wishes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 				
-		if(dragable) {
-			table_songs.setDragEnabled(true);
-			table_songs.setTransferHandler(new TableTransferHandler());
-		} else {
-			table_songs.addMouseListener(listener);
-		}
+		table_wishes.addMouseListener(listener);
 		
-		table_songs.getTableHeader().setReorderingAllowed(false);
+		table_wishes.getTableHeader().setReorderingAllowed(false);
 		
-		tableModelSongs.addColumn("Count");
-		tableModelSongs.addColumn("Artist");
-		tableModelSongs.addColumn("Title");
-		tableModelSongs.addColumn("Album");
-		tableModelSongs.addColumn("Genre");
-		tableModelSongs.addColumn("Length");
-		tableModelSongs.addColumn("ID");
+		tableModelWishes.addColumn("Count");
+		tableModelWishes.addColumn("Artist");
+		tableModelWishes.addColumn("Title");
+		tableModelWishes.addColumn("Album");
+		tableModelWishes.addColumn("Genre");
+		tableModelWishes.addColumn("Length");
+		tableModelWishes.addColumn("ID");
 		
 		updateSongList();
 		
-		this.add(new JScrollPane(table_songs), "width 530!, height 180!");
+		this.add(new JScrollPane(table_wishes), "width 530!, height 180!");
 
 	}
 	
 	public void updateSongList() {
-		table_songs.setRowSorter(null);
-		tableModelSongs.getDataVector().removeAllElements();
+		table_wishes.setRowSorter(null);
+		tableModelWishes.getDataVector().removeAllElements();
 		for(Wish w: RESTHandler.getWishes().getWish()) {
 			Vector<String> v = new Vector<String>();
 			v.removeAllElements();
@@ -94,31 +89,30 @@ public class WishPanel extends JPanel {
 			Format formatter = new SimpleDateFormat( "mm:ss" );
 			v.add(String.valueOf(formatter.format((s.getLength()*1000))));
 			v.add(String.valueOf(w.getId()));
-			System.out.println("" + tableModelSongs.getColumnCount());
-			System.out.println("" + v.size());
-			tableModelSongs.addRow(v);
+			tableModelWishes.addRow(v);
 		}
 		
 		autoFitTable();
-		tableModelSongs.fireTableDataChanged();
-		table_songs.setAutoCreateRowSorter(true);
+		tableModelWishes.fireTableDataChanged();
+		table_wishes.setAutoCreateRowSorter(true);
+		sortByColumn(0);
 
 	}
 
 	public void autoFitTable() {
-		for(int j=0; j < table_songs.getColumnModel().getColumnCount(); j++) {
+		for(int j=0; j < table_wishes.getColumnModel().getColumnCount(); j++) {
 
 			//Set the width to be the header width of this column
-			TableCellRenderer headerRenderer = table_songs.getTableHeader().getDefaultRenderer();
-			TableColumn column = table_songs.getColumnModel().getColumn(j);
-			Component comp = headerRenderer.getTableCellRendererComponent(table_songs, column.getHeaderValue(),	false, false, 0, 0);
+			TableCellRenderer headerRenderer = table_wishes.getTableHeader().getDefaultRenderer();
+			TableColumn column = table_wishes.getColumnModel().getColumn(j);
+			Component comp = headerRenderer.getTableCellRendererComponent(table_wishes, column.getHeaderValue(),	false, false, 0, 0);
 			int width = comp.getPreferredSize().width;
 	
 			//Set the width to be the larger of the header or a cell width in this column
-			for (int i=0; i< table_songs.getRowCount(); i++)
+			for (int i=0; i< table_wishes.getRowCount(); i++)
 			{
-				TableCellRenderer renderer = table_songs.getCellRenderer(i, j);
-				Component c = renderer.getTableCellRendererComponent(table_songs, table_songs.getValueAt(i, j), false, false, i, j);
+				TableCellRenderer renderer = table_wishes.getCellRenderer(i, j);
+				Component c = renderer.getTableCellRendererComponent(table_wishes, table_wishes.getValueAt(i, j), false, false, i, j);
 				width = Math.max(width, c.getPreferredSize().width);
 			}
 	
@@ -139,7 +133,7 @@ public class WishPanel extends JPanel {
 	
 	public void replaceColumn(int index, String newname) {
 
-		JTableHeader th = table_songs.getTableHeader();
+		JTableHeader th = table_wishes.getTableHeader();
 		TableColumnModel tcm = th.getColumnModel();
 		TableColumn tc = tcm.getColumn(index);
 		tc.setHeaderValue(newname);
@@ -149,9 +143,9 @@ public class WishPanel extends JPanel {
 	}
 	
 	public void sortByColumn(int index) {
-		RowSorter<? extends TableModel> sorter = table_songs.getRowSorter();
+		RowSorter<? extends TableModel> sorter = table_wishes.getRowSorter();
     	ArrayList<RowSorter.SortKey> list = new ArrayList<RowSorter.SortKey>();
-    	list.add( new RowSorter.SortKey(index, SortOrder.DESCENDING) );
+    	list.add(new RowSorter.SortKey(index, SortOrder.DESCENDING));
     	sorter.setSortKeys(list);
 	}
 

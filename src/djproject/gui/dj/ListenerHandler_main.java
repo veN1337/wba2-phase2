@@ -43,6 +43,11 @@ CaretListener {
 					gui.song_control_choose.updateSongList();
 				} else if(((JTabbedPane) e.getSource()).getSelectedIndex() == 4) {
 					gui.song_change_choose.updateSongList();
+				} else if(((JTabbedPane) e.getSource()).getSelectedIndex() == 1) {
+					gui.wish_choose.updateSongList();
+				}
+				else if(((JTabbedPane) e.getSource()).getSelectedIndex() == 2) {
+					gui.comment_choose.updateCommentList();
 				}
 			}	
 		} catch (NullPointerException ex) {
@@ -139,6 +144,11 @@ CaretListener {
 			RESTHandler.deleteWish(gui.wish_choose.getId());
 			gui.wish_choose.updateSongList();
 			gui.btn_deletewish.setEnabled(false);
+		}
+		if(e.getSource().equals(gui.btn_deletecomment)) {
+			RESTHandler.deleteComment(gui.comment_choose.getId());
+			gui.comment_choose.updateCommentList();
+			gui.btn_deletecomment.setEnabled(false);
 		}	
 	}
 
@@ -175,9 +185,13 @@ CaretListener {
 			gui.btn_updatesong.setEnabled(true);
 			gui.btn_deletesong.setEnabled(true);
 		}
-		if(e.getSource().equals(gui.wish_choose.table_songs)) {
-			gui.wish_choose.setId(Integer.parseInt((String) gui.wish_choose.table_songs.getValueAt(gui.wish_choose.table_songs.getSelectedRow(), 6)));
+		if(e.getSource().equals(gui.wish_choose.table_wishes)) {
+			gui.wish_choose.setId(Integer.parseInt((String) gui.wish_choose.table_wishes.getValueAt(gui.wish_choose.table_wishes.getSelectedRow(), 4)));
 			gui.btn_deletewish.setEnabled(true);
+		}
+		if(e.getSource().equals(gui.comment_choose.table_comments)) {
+			gui.comment_choose.setId(Integer.parseInt((String) gui.comment_choose.table_comments.getValueAt(gui.comment_choose.table_comments.getSelectedRow(), 4)));
+			gui.btn_deletecomment.setEnabled(true);
 		}
 	}
 
