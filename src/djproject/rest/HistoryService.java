@@ -13,7 +13,6 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import djproject.song_history.History;
-import djproject.song_history.Nowandnext;
 import djproject.song_history.ObjectFactory;
 
 @Path( "/history" )
@@ -23,22 +22,16 @@ public class HistoryService
 	private static final String HISTORY_LIST_XML = "xml/song_history.xml";
 
 	@PUT @Consumes( "application/xml" )
-	public History updateHistory(Nowandnext nn) throws JAXBException
+	public History updateHistory(History h) throws JAXBException
 	{	
 		ObjectFactory ob = new ObjectFactory();
 		History list = ob.createHistory();
 		JAXBContext ctx = JAXBContext.newInstance(History.class);
-		Unmarshaller unm = ctx.createUnmarshaller();
-		list = (History) unm.unmarshal(new File(HISTORY_LIST_XML));
-		
-		list.getSong().add(list.getNowandnext().getNow().getSong());
-		
-		list.setNowandnext(nn);	
-		
+
 		Marshaller marshaller = ctx.createMarshaller();
 		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-		marshaller.marshal(list, (new File(HISTORY_LIST_XML)));
+		marshaller.marshal(h, (new File(HISTORY_LIST_XML)));
 		
 		return list;
 	}

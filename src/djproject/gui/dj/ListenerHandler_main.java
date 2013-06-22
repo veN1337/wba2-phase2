@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
+import java.io.StringWriter;
 import java.util.GregorianCalendar;
 import java.util.Vector;
 
@@ -18,13 +19,19 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.jivesoftware.smackx.pubsub.LeafNode;
+import org.jivesoftware.smackx.pubsub.PayloadItem;
+import org.jivesoftware.smackx.pubsub.SimplePayload;
 
 import djproject.rest.RESTHandler;
+import djproject.song_history.History;
 import djproject.song_history.Next;
 import djproject.song_history.Now;
 import djproject.song_history.Nowandnext;
@@ -36,13 +43,13 @@ MouseListener, KeyListener, ActionListener, ChangeListener,
 CaretListener, DocumentListener {
 	
 	GUI_main gui;
-//	NodeHandler nh;
-//	LeafNode node;
+	NodeHandler nh;
+	LeafNode node;
 	
 	public ListenerHandler_main(NodeHandler nh, LeafNode node){
 		gui = new GUI_main(this, nh, node);
-//		this.nh = nh;
-//		this.node = node;
+		this.nh = nh;
+		this.node = node;
 	}
 
 	@Override
@@ -185,9 +192,37 @@ CaretListener, DocumentListener {
 				nn.getNext().getSong().setSongId(Integer.parseInt(gui.txt_nextsong.getText().split(" - ")[0]));
 				nn.getNext().getSong().setTimePlayedAt(now);
 				
-				RESTHandler.updateHistory(nn);
+				History h = RESTHandler.getHistory();
 				
-			} catch (DatatypeConfigurationException e1) {
+				StringWriter writer = new StringWriter();
+
+				JAXBContext ctx = JAXBContext.newInstance(History.class);
+								
+				h.getSong().add(h.getNowandnext().getNow().getSong());
+				
+				h.setNowandnext(nn);	
+				
+				Marshaller marshaller = ctx.createMarshaller();
+				marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+				marshaller.marshal(h, writer);
+				
+				System.out.println(writer);
+				
+				SimplePayload payload = new SimplePayload("historyupdate","history", h.toString());
+
+		        PayloadItem<SimplePayload> item = new PayloadItem<SimplePayload>("historyupdate", payload);
+//		        
+//		        SimplePayload payload = new SimplePayload("book","pubsub:test:book", "<book xmlns='pubsub:test:book'><title>Lord of the Rings</title></book>");
+//
+//		        PayloadItem<SimplePayload> item = new PayloadItem<SimplePayload>("asd", payload);
+		        
+		        //node.send(new PayloadItem<SimplePayload>("test" + System.currentTimeMillis(), new SimplePayload("book", "pubsub:test:book", "")));
+				node.publish(item);
+				
+				RESTHandler.updateHistory(h);
+				
+			} catch (DatatypeConfigurationException | JAXBException e1) {
 				e1.printStackTrace();
 			}        
 

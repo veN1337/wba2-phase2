@@ -7,7 +7,7 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 import djproject.comments.Comments;
-import djproject.song_history.Nowandnext;
+import djproject.song_history.History;
 import djproject.songs.Song;
 import djproject.songs.Songs;
 import djproject.wishes.Wishes;
@@ -83,12 +83,20 @@ public class RESTHandler {
 		service.type("application/xml").delete();
 	}
 	
-	public static void updateHistory(Nowandnext nn) {
+	public static void updateHistory(History h) {
 		WebResource service = client.resource(host + "/history/");
 		service.type("application/xml")
 	            .accept("application/xml")
-	            .entity(nn)
+	            .entity(h)
 	            .put();
+	}
+
+	public static History getHistory() {
+		WebResource service = client.resource(host + "/history/");
+		ClientResponse response = service.type("application/xml")
+	            .accept("application/xml")
+	            .get(ClientResponse.class);
+		return response.getEntity(History.class);
 	}
 	
 }
