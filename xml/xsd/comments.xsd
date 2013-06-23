@@ -39,5 +39,9 @@
     			<xs:element ref="comment" maxOccurs="unbounded" minOccurs="0"></xs:element>
     		</xs:sequence>
     	</xs:complexType>
+    	    	<xs:unique name="unique-id">
+	      <xs:selector xpath="comment/id" />
+	      <xs:field xpath="." />
+   		</xs:unique>
     </xs:element>
 </xs:schema>
