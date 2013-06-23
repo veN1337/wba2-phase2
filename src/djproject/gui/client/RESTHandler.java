@@ -8,6 +8,7 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 import djproject.comments.Comment;
 import djproject.song_history.History;
+import djproject.songs.Song;
 import djproject.songs.Songs;
 import djproject.wishes.Wish;
 
@@ -25,6 +26,14 @@ public class RESTHandler {
 	            .accept("application/xml")
 	            .get(ClientResponse.class);
 		return response.getEntity(Songs.class);
+	}
+	
+	public static Song getSong(int id) {
+		WebResource service = client.resource(host + "/songs/" + id);
+		ClientResponse response = service.type("application/xml")
+	            .accept("application/xml")
+	            .get(ClientResponse.class);
+		return response.getEntity(Song.class);
 	}
 	
 	public static void addWish(Wish w) {
