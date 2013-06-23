@@ -1,4 +1,4 @@
-package djproject.gui.client;
+package djproject.gui.client.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +9,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.util.GregorianCalendar;
 
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
@@ -20,8 +19,9 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import djproject.comments.Comment;
+import djproject.gui.client.utils.RESTHandler;
+import djproject.gui.client.utils.Subscriber;
 import djproject.wishes.Wish;
-import djproject.xmpp.Subscriber;
 
 public class ListenerHandler extends MouseMotionAdapter implements
 MouseListener, KeyListener, ActionListener, ChangeListener,

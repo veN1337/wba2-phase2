@@ -1,4 +1,4 @@
-package djproject.gui.dj;
+package djproject.gui.dj.gui;
 
 import java.awt.Component;
 import java.text.Format;
@@ -19,7 +19,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
-import djproject.rest.RESTHandler;
+import djproject.gui.dj.utils.RESTHandler;
 import djproject.songs.Song;
 import djproject.wishes.Wish;
 

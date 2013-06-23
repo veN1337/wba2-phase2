@@ -1,4 +1,4 @@
-package djproject.gui.client;
+package djproject.gui.client.gui;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -56,8 +56,6 @@ public class GUI extends JFrame implements ActionListener{
 	JButton btn_wish = new JButton("Request");
 	JButton btn_comment = new JButton("Send");
 	JButton btn_meta = new JButton("Metadaten");
-	JLabel lab_playingnow = new JLabel("Currently playing:");
-	JLabel lab_currentsong = new JLabel("Rick Astley - Never gonna give you up");
 	
 	JSlider sli_rating = new JSlider(1, 10);
 	
@@ -66,7 +64,7 @@ public class GUI extends JFrame implements ActionListener{
 	JTextArea txp_comments = new JTextArea();
 	
 	SongChoosePanel songs;
-	HistoryPanel history;
+	public HistoryPanel history;
 	
 	DefaultListModel<String> listModelDJ = new DefaultListModel<String>();
 	JList list_DJs = new JList(listModelDJ);
@@ -102,7 +100,6 @@ public class GUI extends JFrame implements ActionListener{
 		sli_rating.setMinorTickSpacing(1);
 		sli_rating.setPaintTicks(true);
 		
-		lab_currentsong.setFont(new Font(lab_currentsong.getFont().getName(),Font.BOLD,lab_currentsong.getFont().getSize()));
 				
 		//Event Panel wird bestückt
 		panel_events.add(new JScrollPane(list_Events), "dock west, width 300!, height 240!");
@@ -115,8 +112,8 @@ public class GUI extends JFrame implements ActionListener{
 		panel_list.add(btn_unsubscribeDJ, "width 140!,height 30!, wrap");
 		
 		//Song Panel wird bestückt
-		panel_songs.add(lab_playingnow, "span 1, width 100!");
-		panel_songs.add(lab_currentsong, "span 2, wrap");
+		//panel_songs.add(lab_playingnow, "span 1, width 100!");
+		//panel_songs.add(lab_currentsong, "span 2, wrap");
 		panel_songs.add(cbox_subscriptions3, "width 430!, span 3, wrap");
 		//panel_songs.add(btn_meta, "width 120!,height 30!, wrap");
 		panel_songs.add(history, "width 430!, height 175!, span 3");

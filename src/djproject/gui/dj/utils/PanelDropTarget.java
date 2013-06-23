@@ -1,4 +1,4 @@
-package djproject.gui.dj;
+package djproject.gui.dj.utils;
 
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -18,6 +18,9 @@ import com.mpatric.mp3agic.ID3v2;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
+
+import djproject.gui.dj.gui.GUI_main;
+import djproject.gui.dj.gui.SongInfoPanel;
 
 public final class PanelDropTarget extends DropTarget {
 	/**

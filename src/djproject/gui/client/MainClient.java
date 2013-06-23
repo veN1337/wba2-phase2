@@ -3,7 +3,8 @@ package djproject.gui.client;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
-import djproject.xmpp.Subscriber;
+import djproject.gui.client.gui.GUI_start;
+
 
 public class MainClient {
 	public static void main(String[] args) {

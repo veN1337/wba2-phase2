@@ -1,4 +1,4 @@
-package djproject.gui.dj;
+package djproject.gui.dj.utils;
 
 import org.jivesoftware.smack.Connection;
 import org.jivesoftware.smack.ConnectionConfiguration;

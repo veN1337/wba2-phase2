@@ -1,4 +1,4 @@
-package djproject.gui.dj;
+package djproject.gui.dj.gui;
 
 import java.awt.Color;
 import java.util.Vector;
@@ -17,13 +17,13 @@ public class SongInfoPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	JTextField txt_artist = new JTextField();
-	JTextField txt_title = new JTextField();
-	JTextField txt_album = new JTextField();
-	JTextField txt_albumartist = new JTextField();
-	JTextField txt_number_album = new JTextField();
-	JTextField txt_genre = new JTextField();
-	JTextField txt_length = new JTextField();
+	public JTextField txt_artist = new JTextField();
+	public JTextField txt_title = new JTextField();
+	public JTextField txt_album = new JTextField();
+	public JTextField txt_albumartist = new JTextField();
+	public JTextField txt_number_album = new JTextField();
+	public JTextField txt_genre = new JTextField();
+	public JTextField txt_length = new JTextField();
 
 	JLabel label_artist = new JLabel();
 	JLabel label_title = new JLabel();

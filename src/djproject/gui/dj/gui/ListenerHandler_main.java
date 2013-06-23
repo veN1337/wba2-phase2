@@ -1,4 +1,4 @@
-package djproject.gui.dj;
+package djproject.gui.dj.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,7 +30,8 @@ import org.jivesoftware.smackx.pubsub.LeafNode;
 import org.jivesoftware.smackx.pubsub.PayloadItem;
 import org.jivesoftware.smackx.pubsub.SimplePayload;
 
-import djproject.rest.RESTHandler;
+import djproject.gui.dj.utils.NodeHandler;
+import djproject.gui.dj.utils.RESTHandler;
 import djproject.song_history.History;
 import djproject.song_history.Next;
 import djproject.song_history.Now;
@@ -203,19 +204,19 @@ CaretListener, DocumentListener {
 				h.setNowandnext(nn);	
 				
 				Marshaller marshaller = ctx.createMarshaller();
-				marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+				//marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
 				marshaller.marshal(h, writer);
 				
-				System.out.println(writer);
-				
-				SimplePayload payload = new SimplePayload("historyupdate","history", h.toString());
+				SimplePayload payload = new SimplePayload("historyupdate","history", writer.toString().replace("\n", "").replace("\r", "").replace(" ", "").replace("\t","").replace("<?xmlversion=\"1.0\"encoding=\"UTF-8\"standalone=\"yes\"?>", ""));
 
 		        PayloadItem<SimplePayload> item = new PayloadItem<SimplePayload>("historyupdate", payload);
-//		        
+		        
 //		        SimplePayload payload = new SimplePayload("book","pubsub:test:book", "<book xmlns='pubsub:test:book'><title>Lord of the Rings</title></book>");
 //
 //		        PayloadItem<SimplePayload> item = new PayloadItem<SimplePayload>("asd", payload);
+
+		        //System.out.println(writer.toString().replace("\n", "").replace("\r", "").replace(" ", "").replace("\t",""));
 		        
 		        //node.send(new PayloadItem<SimplePayload>("test" + System.currentTimeMillis(), new SimplePayload("book", "pubsub:test:book", "")));
 				node.publish(item);

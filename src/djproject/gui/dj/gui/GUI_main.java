@@ -1,4 +1,4 @@
-package djproject.gui.dj;
+package djproject.gui.dj.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,6 +14,9 @@ import javax.swing.JTextField;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smackx.pubsub.LeafNode;
 
+import djproject.gui.dj.utils.NodeHandler;
+import djproject.gui.dj.utils.PanelDropTarget;
+import djproject.gui.dj.utils.TableTransferHandler;
 import djproject.rest.RESTServer;
 import net.miginfocom.swing.MigLayout;
 
@@ -54,13 +57,13 @@ public class GUI_main extends JFrame {
 	JTextField txt_genre = new JTextField();
 	JTextField txt_length = new JTextField();
 	
-	JButton btn_addsong = new JButton("Add");
-	JButton btn_resetsong = new JButton("Reset");
-	JButton btn_updatesong = new JButton("Update");
-	JButton btn_deletesong = new JButton("Delete");
-	JButton btn_deletewish = new JButton("Delete");
-	JButton btn_deletecomment = new JButton("Delete");
-	JButton btn_updatehistory = new JButton("Update History");
+	public JButton btn_addsong = new JButton("Add");
+	public JButton btn_resetsong = new JButton("Reset");
+	public JButton btn_updatesong = new JButton("Update");
+	public JButton btn_deletesong = new JButton("Delete");
+	public JButton btn_deletewish = new JButton("Delete");
+	public JButton btn_deletecomment = new JButton("Delete");
+	public JButton btn_updatehistory = new JButton("Update History");
 	
 	SongChoosePanel song_control_choose;
 	SongChoosePanel song_change_choose;
@@ -68,7 +71,7 @@ public class GUI_main extends JFrame {
 	CommentPanel comment_choose;
 
 	SongInfoPanel song_change_info;
-	SongInfoPanel song_add_info;
+	public SongInfoPanel song_add_info;
 	
 	NodeHandler nh;
 	LeafNode node;

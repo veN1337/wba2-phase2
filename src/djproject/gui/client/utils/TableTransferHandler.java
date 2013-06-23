@@ -1,4 +1,4 @@
-package djproject.gui.dj;
+package djproject.gui.client.utils;
 
 import java.awt.Component;
 import java.awt.datatransfer.Transferable;

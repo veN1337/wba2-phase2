@@ -1,4 +1,4 @@
-package djproject.gui.dj;
+package djproject.gui.dj.gui;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;

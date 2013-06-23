@@ -1,4 +1,4 @@
-package djproject.gui.client;
+package djproject.gui.dj.gui;
 
 import java.awt.Component;
 import java.text.Format;
@@ -24,7 +24,8 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
-import djproject.rest.RESTHandler;
+import djproject.gui.dj.utils.RESTHandler;
+import djproject.gui.dj.utils.TableTransferHandler;
 import djproject.songs.Song;
 
 import net.miginfocom.swing.MigLayout;
@@ -62,7 +63,7 @@ public class SongChoosePanel extends JPanel {
 	};
 	JTable table_songs = new JTable(tableModelSongs);
 	
-	public SongChoosePanel(ListenerHandler listener) {
+	public SongChoosePanel(ListenerHandler_main listener, boolean dragable) {
 		
 		setLayout(layout);
 		
@@ -75,13 +76,13 @@ public class SongChoosePanel extends JPanel {
 		
 		JLabel dummy = new JLabel();
 		
-		panel_filter.add(label_filtertype, "width 120!, height 30!, span 3, wrap");
-		panel_filter.add(cbox_filter, "width 120!, height 30!, span 3, wrap");
-		panel_filter.add(label_filtertext, "width 120!, height 30!, span 3, wrap");
-		panel_filter.add(txt_filter, "width 120!, height 30!, span 3, wrap");
-		panel_filter.add(btn_filter, "width 55!, height 30!, span 1");
-		//panel_filter.add(dummy, "width 10!, height 30!, span 1");
-		panel_filter.add(btn_filterreset, "width 62!, height 30!, span 3");
+		panel_filter.add(label_filtertype, "width 150!, height 30!, span 3, wrap");
+		panel_filter.add(cbox_filter, "width 150!, height 30!, span 3, wrap");
+		panel_filter.add(label_filtertext, "width 150!, height 30!, span 3, wrap");
+		panel_filter.add(txt_filter, "width 150!, height 30!, span 3, wrap");
+		panel_filter.add(btn_filter, "width 65!, height 30!, span 1");
+		panel_filter.add(dummy, "width 10!, height 30!, span 1");
+		panel_filter.add(btn_filterreset, "width 65!, height 30!, span 3");
 		
 		btn_filter.addActionListener(listener);
 		btn_filterreset.addActionListener(listener);
@@ -92,9 +93,12 @@ public class SongChoosePanel extends JPanel {
 		table_songs.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table_songs.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 				
-
-		table_songs.addMouseListener(listener);
-
+		if(dragable) {
+			table_songs.setDragEnabled(true);
+			table_songs.setTransferHandler(new TableTransferHandler());
+		} else {
+			table_songs.addMouseListener(listener);
+		}
 		
 		table_songs.getTableHeader().setReorderingAllowed(false);
 		
@@ -109,12 +113,13 @@ public class SongChoosePanel extends JPanel {
 		
 		updateSongList();
 		
-		this.add(new JScrollPane(table_songs), "width 300!, height 180!");
-		this.add(panel_filter, "width 130!, height 180!");
+		this.add(new JScrollPane(table_songs), "width 350!, height 180!");
+		this.add(panel_filter, "width 200!, height 180!");
 
 	}
 	
 	public void updateSongList() {
+		table_songs.clearSelection();
 		table_songs.setRowSorter(null);
 		tableModelSongs.getDataVector().removeAllElements();
 		for(Song s: RESTHandler.getSongs(String.valueOf(cbox_filter.getSelectedItem()), txt_filter.getText()).getSong()) {
@@ -136,10 +141,6 @@ public class SongChoosePanel extends JPanel {
 		
 		table_songs.setAutoCreateRowSorter(true);
 
-	}
-	
-	public int getSongID(){
-		return Integer.parseInt((String)(table_songs.getValueAt(table_songs.getSelectedRow(),0)));
 	}
 
 	public void autoFitTable() {

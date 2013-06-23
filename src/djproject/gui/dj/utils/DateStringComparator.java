@@ -1,4 +1,4 @@
-package djproject.gui.client;
+package djproject.gui.dj.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

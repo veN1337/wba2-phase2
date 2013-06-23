@@ -1,12 +1,7 @@
-package djproject.xmpp;
+package djproject.gui.client.utils;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Scanner;
-
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
-
 import org.jivesoftware.smack.Connection;
 import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.XMPPConnection;
@@ -15,12 +10,12 @@ import org.jivesoftware.smackx.packet.DiscoverItems;
 import org.jivesoftware.smackx.packet.DiscoverItems.Item;
 import org.jivesoftware.smackx.pubsub.*;
 
-import djproject.gui.client.GUI;
+import djproject.gui.client.gui.GUI;
 
 public class Subscriber {
 	
-	private final static String server = Settings.server();
-	private final static int port = Settings.port();
+	private final static String server = "v2201206130288594.yourvserver.net";
+	private final static int port = 5222;
 	
 	GUI gui;
 	
@@ -30,12 +25,14 @@ public class Subscriber {
 	Iterator<Item> it2;
 	Item[] list;
 	List<Subscription> subs;
+	ItemEventCoordinator ilistener;
 	public String user;
 	
 	public Subscriber(GUI gui, String username, String password){
 		this.gui = gui;
 		this.user = username;
 		connect(username,password);
+		ilistener = new ItemEventCoordinator(gui);
 	}
 	
 	public void connect(String username, String password){
@@ -100,8 +97,8 @@ public class Subscriber {
 	        
 			boolean subPossible=true;
 			
-	        Node node;
-			node = mgr.getNode(nodeSub);
+	        LeafNode node;
+			node = (LeafNode) mgr.getNode(nodeSub);
 			
 			for(int i = 0; i < subs.size();i++){
 				if(subs.get(i).getNode().equals(nodeSub)){
@@ -110,9 +107,9 @@ public class Subscriber {
 			}
 			
 			if(subPossible){
-		        node.addItemEventListener(new ItemEventCoordinator(gui));
+		        node.addItemEventListener(ilistener);
 		    	Subscription sub = node.subscribe("user2@"+server);
-		    	sub.getId();
+		    	System.out.println("Subscribed: " + sub.getId());
 			}
 	       
 	        /*System.out.println("Subscribed to: " + node);	
@@ -136,7 +133,7 @@ public class Subscriber {
 			
 			for(int i = 0; i < subs.size();i++){
 				if(subs.get(i).getNode().equals(nodeUnsub)){
-					node.addItemEventListener(new ItemEventCoordinator(gui));
+					node.removeItemEventListener(ilistener);
 			    	node.unsubscribe("user2@"+server, subs.get(i).getId());
 			    	subs.remove(i);
 				}

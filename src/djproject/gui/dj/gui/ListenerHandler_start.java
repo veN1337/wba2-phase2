@@ -1,4 +1,4 @@
-package djproject.gui.dj;
+package djproject.gui.dj.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +16,8 @@ import javax.swing.event.ChangeListener;
 
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smackx.pubsub.LeafNode;
+
+import djproject.gui.dj.utils.NodeHandler;
 
 public class ListenerHandler_start extends MouseMotionAdapter implements
 MouseListener, KeyListener, ActionListener, ChangeListener,

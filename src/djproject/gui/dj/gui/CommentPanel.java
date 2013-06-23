@@ -1,4 +1,4 @@
-package djproject.gui.dj;
+package djproject.gui.dj.gui;
 
 import java.awt.Component;
 import java.text.Format;
@@ -15,7 +15,8 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableRowSorter;
 
 import djproject.comments.Comment;
-import djproject.rest.RESTHandler;
+import djproject.gui.dj.utils.DateStringComparator;
+import djproject.gui.dj.utils.RESTHandler;
 import net.miginfocom.swing.MigLayout;
 
 public class CommentPanel extends JPanel {
@@ -84,10 +85,6 @@ public class CommentPanel extends JPanel {
 			//v.add(c.getTime().toGregorianCalendar().getTime());
 			v.add(String.valueOf(id));
 			tableModelComments.addRow(v);
-			for(Object o: v) {
-				System.out.print("" + o + " - ");
-			}
-			System.out.println();
 		}
 		
 		tableModelComments.fireTableDataChanged();

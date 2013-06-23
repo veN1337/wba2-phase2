@@ -1,4 +1,4 @@
-package djproject.gui.client;
+package djproject.gui.client.utils;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;

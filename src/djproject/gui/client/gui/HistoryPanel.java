@@ -1,27 +1,24 @@
-package djproject.gui.client;
+package djproject.gui.client.gui;
 
 import java.awt.Component;
+import java.awt.Font;
 import java.text.Format;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Vector;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.RowSorter;
-import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
-import djproject.gui.client.RESTHandler;
-import djproject.gui.dj.DateStringComparator;
+import djproject.gui.client.utils.RESTHandler;
 import djproject.song_history.History;
 import djproject.song_history.Song;
 
@@ -48,6 +45,11 @@ public class HistoryPanel extends JPanel {
 	JTable table_history = new JTable(tableModelHistory);
 	//TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(tableModelHistory);
 	
+	JLabel lab_playingnow = new JLabel("Currently playing:");
+	JLabel lab_currentsong = new JLabel("Rick Astley - Never gonna give you up");
+	JLabel lab_playingnext = new JLabel("Playing next:");
+	JLabel lab_nextsong = new JLabel("Rick Astley - Never gonna give you up");
+		
 	public HistoryPanel(ListenerHandler listener) {
 		
 		setLayout(layout);	
@@ -61,6 +63,9 @@ public class HistoryPanel extends JPanel {
 		
 		table_history.getTableHeader().setReorderingAllowed(false);
 		
+		lab_currentsong.setFont(new Font(lab_currentsong.getFont().getName(),Font.BOLD,lab_currentsong.getFont().getSize()));
+		lab_nextsong.setFont(new Font(lab_nextsong.getFont().getName(),Font.ITALIC,lab_nextsong.getFont().getSize()));
+		
 		tableModelHistory.addColumn("Time played at");
 		tableModelHistory.addColumn("Artist");
 		tableModelHistory.addColumn("Title");
@@ -71,16 +76,31 @@ public class HistoryPanel extends JPanel {
 		tableModelHistory.addColumn("Length");
 		tableModelHistory.addColumn("ID");
 		
-		updateList();
+		lab_currentsong.setText("NOW");
+		lab_nextsong.setText("NEXT");
 		
-		this.add(new JScrollPane(table_history), "width 430!, height 175!");
+		this.add(lab_playingnow, "width 100!, span 1");
+		this.add(lab_currentsong, "width 300!, span 2, wrap");
+		this.add(lab_playingnext, "width 100!, span 1");
+		this.add(lab_nextsong, "width 300!, span 2, wrap");
+		this.add(new JScrollPane(table_history), "width 430!, height 175!, span 3");
+		
+		updateList();
 
 	}
 	
 	public void updateList() {
 		table_history.setRowSorter(null);
 		tableModelHistory.getDataVector().removeAllElements();
-		for(Song s: RESTHandler.getHistory().getSong()) {
+		History h = RESTHandler.getHistory();
+		djproject.songs.Song now = RESTHandler.getSong(h.getNowandnext().getNow().getSong().getSongId());
+		djproject.songs.Song next = RESTHandler.getSong(h.getNowandnext().getNext().getSong().getSongId());
+		
+		lab_currentsong.setText(now.getArtist() + " - " + now.getTitle());
+		lab_nextsong.setText(next.getArtist() + " - " + next.getTitle());
+		System.out.println(lab_currentsong.getText());
+		System.out.println(lab_nextsong.getText());
+		for(Song s: h.getSong()) {
 			Vector<String> v = new Vector<String>();
 			Format formatter = new SimpleDateFormat( "dd.MM.yyyy HH:mm:ss" );
 			v.add(String.valueOf(formatter.format((s.getTimePlayedAt().toGregorianCalendar().getTime()))));
@@ -104,10 +124,14 @@ public class HistoryPanel extends JPanel {
 
 	}
 	
-	public void updateList(History hist) {
+	public void updateList(History h) {
 		table_history.setRowSorter(null);
 		tableModelHistory.getDataVector().removeAllElements();
-		for(Song s: hist.getSong()) {
+		djproject.songs.Song now = RESTHandler.getSong(h.getNowandnext().getNow().getSong().getSongId());
+		djproject.songs.Song next = RESTHandler.getSong(h.getNowandnext().getNext().getSong().getSongId());
+		lab_currentsong.setText(now.getArtist() + " - " + now.getTitle());
+		lab_nextsong.setText(next.getArtist() + " - " + next.getTitle());
+		for(Song s: h.getSong()) {
 			Vector<String> v = new Vector<String>();
 			Format formatter = new SimpleDateFormat( "dd.MM.yyyy HH:mm:ss" );
 			v.add(String.valueOf(formatter.format((s.getTimePlayedAt().toGregorianCalendar().getTime()))));
