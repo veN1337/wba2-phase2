@@ -266,7 +266,7 @@ CaretListener, DocumentListener {
 			gui.btn_deletesong.setEnabled(true);
 		}
 		if(e.getSource().equals(gui.wish_choose.table_wishes)) {
-			gui.wish_choose.setId(Integer.parseInt((String) gui.wish_choose.table_wishes.getValueAt(gui.wish_choose.table_wishes.getSelectedRow(), 4)));
+			gui.wish_choose.setId(Integer.parseInt((String) gui.wish_choose.table_wishes.getValueAt(gui.wish_choose.table_wishes.getSelectedRow(), 6)));
 			gui.btn_deletewish.setEnabled(true);
 		}
 		if(e.getSource().equals(gui.comment_choose.table_comments)) {

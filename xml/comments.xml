@@ -1,33 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<comments 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-			xsi:noNamespaceSchemaLocation="./xsd/comments.xsd">
-  <comment>
-    <id>0</id>
-    <author>Sascha</author>
-    <time>2013-05-08T02:20:00</time>
-    <rating>8</rating>
-    <content>Super DJ!</content>
-  </comment>
-  <comment>
-    <id>1</id>
-    <author>Aaron</author>
-    <time>2013-05-08T02:40:00</time>
-    <rating>4</rating>
-    <content>Nicht schlecht, war schon mal besser.</content>
-  </comment>
-  <comment>
-    <id>2</id>
-    <author>Nico</author>
-    <time>2013-06-12T12:30:00</time>
-    <rating>6</rating>
-    <content>Standard</content>
-  </comment>
-  <comment>
-    <id>3</id>
-    <author>Oli</author>
-    <time>2013-03-12T12:34:10</time>
-    <rating>1</rating>
-    <content>Schlecht!</content>
-  </comment>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<comments>
+    <comment>
+        <id>0</id>
+        <author>Sascha</author>
+        <time>2013-05-08T02:20:00</time>
+        <rating>8</rating>
+        <content>Super DJ!</content>
+    </comment>
+    <comment>
+        <id>1</id>
+        <author>Aaron</author>
+        <time>2013-05-08T02:40:00</time>
+        <rating>4</rating>
+        <content>Nicht schlecht, war schon mal besser.</content>
+    </comment>
+    <comment>
+        <id>2</id>
+        <author>Nico</author>
+        <time>2013-06-12T12:30:00</time>
+        <rating>6</rating>
+        <content>Standard</content>
+    </comment>
 </comments>

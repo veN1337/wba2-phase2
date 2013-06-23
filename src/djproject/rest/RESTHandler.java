@@ -79,7 +79,7 @@ public class RESTHandler {
 	}
 
 	public static void deleteComment(int id) {
-		WebResource service = client.resource(host + "/wishes/" + String.valueOf(id));
+		WebResource service = client.resource(host + "/comments/" + String.valueOf(id));
 		service.type("application/xml").delete();
 	}
 	

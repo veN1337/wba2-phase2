@@ -3,20 +3,15 @@ package djproject.gui.dj;
 import java.awt.Component;
 import java.text.Format;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.RowSorter;
-import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
 
 import djproject.comments.Comment;
@@ -63,7 +58,8 @@ public class CommentPanel extends JPanel {
 		tableModelComments.addColumn("Time");
 		tableModelComments.addColumn("ID");
 		
-		table_comments.setRowSorter(sorter);
+		//table_comments.setRowSorter(sorter);
+		table_comments.setAutoCreateRowSorter(true);
 		sorter.setComparator(3, new DateStringComparator());
 		
 		updateCommentList();
@@ -73,7 +69,8 @@ public class CommentPanel extends JPanel {
 	}
 	
 	public void updateCommentList() {
-		table_comments.setRowSorter(null);
+		table_comments.clearSelection();
+		//table_comments.setRowSorter(null);		
 		tableModelComments.getDataVector().removeAllElements();
 		for(Comment c: RESTHandler.getComments().getComment()) {
 			Vector<Object> v = new Vector<Object>();
@@ -87,12 +84,17 @@ public class CommentPanel extends JPanel {
 			//v.add(c.getTime().toGregorianCalendar().getTime());
 			v.add(String.valueOf(id));
 			tableModelComments.addRow(v);
+			for(Object o: v) {
+				System.out.print("" + o + " - ");
+			}
+			System.out.println();
 		}
 		
-		autoFitTable();
 		tableModelComments.fireTableDataChanged();
-		table_comments.setRowSorter(sorter);
-		sortByColumn(3);
+		
+		//table_comments.setRowSorter(sorter);
+		autoFitTable();
+		//sortByColumn(3);
 
 	}
 
@@ -108,9 +110,15 @@ public class CommentPanel extends JPanel {
 			//Set the width to be the larger of the header or a cell width in this column
 			for (int i=0; i< table_comments.getRowCount(); i++)
 			{
-				TableCellRenderer renderer = table_comments.getCellRenderer(i, j);
-				Component c = renderer.getTableCellRendererComponent(table_comments, table_comments.getValueAt(i, j), false, false, i, j);
-				width = Math.max(width, c.getPreferredSize().width);
+				
+				try {
+						TableCellRenderer renderer = table_comments.getCellRenderer(i, j);
+						Component c = renderer.getTableCellRendererComponent(table_comments, table_comments.getValueAt(i, j), false, false, i, j);
+						width = Math.max(width, c.getPreferredSize().width);
+				} catch(ArrayIndexOutOfBoundsException e) {
+					
+				}
+				
 			}
 	
 			//Usethe width of the largest component (header or cell) plus a margin on other side.
@@ -128,23 +136,23 @@ public class CommentPanel extends JPanel {
 		this.id = id;
 	}
 	
-	public void replaceColumn(int index, String newname) {
-
-		JTableHeader th = table_comments.getTableHeader();
-		TableColumnModel tcm = th.getColumnModel();
-		TableColumn tc = tcm.getColumn(index);
-		tc.setHeaderValue(newname);
-		
-		autoFitTable();
-	
-	}
-	
-	public void sortByColumn(int index) {
-		//RowSorter<? extends TableModel> sorter = table_comments.getRowSorter();
-    	ArrayList<RowSorter.SortKey> list = new ArrayList<RowSorter.SortKey>();
-    	list.add( new RowSorter.SortKey(index, SortOrder.DESCENDING) );
-    	sorter.setSortKeys(list);
-	}
+//	public void replaceColumn(int index, String newname) {
+//
+//		JTableHeader th = table_comments.getTableHeader();
+//		TableColumnModel tcm = th.getColumnModel();
+//		TableColumn tc = tcm.getColumn(index);
+//		tc.setHeaderValue(newname);
+//		
+//		autoFitTable();
+//	
+//	}
+//	
+//	public void sortByColumn(int index) {
+//		//RowSorter<? extends TableModel> sorter = table_comments.getRowSorter();
+//    	ArrayList<RowSorter.SortKey> list = new ArrayList<RowSorter.SortKey>();
+//    	list.add( new RowSorter.SortKey(index, SortOrder.DESCENDING) );
+//    	sorter.setSortKeys(list);
+//	}
 
 }
 

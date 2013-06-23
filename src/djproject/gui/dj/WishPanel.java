@@ -74,6 +74,7 @@ public class WishPanel extends JPanel {
 	}
 	
 	public void updateSongList() {
+		table_wishes.clearSelection();
 		table_wishes.setRowSorter(null);
 		tableModelWishes.getDataVector().removeAllElements();
 		for(Wish w: RESTHandler.getWishes().getWish()) {

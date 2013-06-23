@@ -90,7 +90,6 @@ public class GUI_main extends JFrame {
 		comment_choose = new CommentPanel(listener);
 		
 		wish_choose.sortByColumn(0);
-		comment_choose.sortByColumn(3);
 		
 		song_change_info = new SongInfoPanel(listener);
 		song_add_info = new SongInfoPanel(listener);
