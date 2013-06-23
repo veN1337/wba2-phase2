@@ -12,10 +12,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-import javax.swing.table.TableRowSorter;
-
 import djproject.comments.Comment;
-import djproject.gui.dj.utils.DateStringComparator;
 import djproject.gui.dj.utils.RESTHandler;
 import net.miginfocom.swing.MigLayout;
 
@@ -38,7 +35,7 @@ public class CommentPanel extends JPanel {
 	    }
 	};
 	JTable table_comments = new JTable(tableModelComments);
-	TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(tableModelComments);
+	//TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(tableModelComments);
 
 	private int id;
 	
@@ -61,7 +58,7 @@ public class CommentPanel extends JPanel {
 		
 		//table_comments.setRowSorter(sorter);
 		table_comments.setAutoCreateRowSorter(true);
-		sorter.setComparator(3, new DateStringComparator());
+		//sorter.setComparator(3, new DateStringComparator());
 		
 		updateCommentList();
 		
@@ -71,7 +68,7 @@ public class CommentPanel extends JPanel {
 	
 	public void updateCommentList() {
 		table_comments.clearSelection();
-		//table_comments.setRowSorter(null);		
+		table_comments.setRowSorter(null);		
 		tableModelComments.getDataVector().removeAllElements();
 		for(Comment c: RESTHandler.getComments().getComment()) {
 			Vector<Object> v = new Vector<Object>();
@@ -88,7 +85,7 @@ public class CommentPanel extends JPanel {
 		}
 		
 		tableModelComments.fireTableDataChanged();
-		
+		table_comments.setAutoCreateRowSorter(true);
 		//table_comments.setRowSorter(sorter);
 		autoFitTable();
 		//sortByColumn(3);
