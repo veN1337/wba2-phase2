@@ -50,7 +50,7 @@ public class Subscriber {
 			con.connect();
 			// Log into the server
 			con.login("user2", "asd", "java");
-			//System.out.println("Connected");
+			System.out.println("Connected");
 			
 			// Create a pubsub manager using an existing Connection
 			mgr = new PubSubManager(con);
@@ -72,15 +72,16 @@ public class Subscriber {
 				Item i1 = it.next();
 				list[i++] = i1;
 				//System.out.println("Event: "+i1.getNode() + " ("+i+")");
-				gui.addEvent(i1.getNode());
-				discoItems = mgr.discoverNodes(i1.getNode());
+				gui.addDJ(i1.getNode());
+				System.out.println(i1.getNode());
+				/*discoItems = mgr.discoverNodes(i1.getNode());
 				it2 = discoItems.getItems();
 				while(it2.hasNext()) {
 					Item i2 = it2.next();
 					list[i++] = i2;					
 					//System.out.println("DJ: "+i2.getNode() + " ("+i+")");
 					gui.addDJ(i2.getNode());
-				}
+				}*/
 			}			
 			gui.updateSubs(getSubs());
 		} catch (XMPPException e) {

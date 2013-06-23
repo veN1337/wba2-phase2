@@ -30,4 +30,14 @@
         <number_in_album>1</number_in_album>
         <genre>Dance</genre>
     </song>
+    <song>
+        <id>3</id>
+        <artist>Penis</artist>
+        <title>Penis</title>
+        <length>83</length>
+        <album>Penis</album>
+        <album_artist>Penis</album_artist>
+        <number_in_album>58008</number_in_album>
+        <genre>Penis</genre>
+    </song>
 </songs>

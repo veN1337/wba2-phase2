@@ -65,6 +65,8 @@ public class GUI extends JFrame implements ActionListener{
 	
 	JTextArea txp_comments = new JTextArea();
 	
+	SongChoosePanel songs;
+	
 	DefaultListModel<String> listModelDJ = new DefaultListModel<String>();
 	JList list_DJs = new JList(listModelDJ);
 	
@@ -92,6 +94,8 @@ public class GUI extends JFrame implements ActionListener{
 		cbox_subscriptions2.addActionListener(listener);
 		cbox_subscriptions3.addActionListener(listener);
 		
+		songs = new SongChoosePanel(listener);
+		
 		sli_rating.setMajorTickSpacing(9);
 		sli_rating.setMinorTickSpacing(1);
 		sli_rating.setPaintTicks(true);
@@ -113,7 +117,7 @@ public class GUI extends JFrame implements ActionListener{
 		panel_songs.add(lab_currentsong, "span 2, wrap");
 		panel_songs.add(cbox_subscriptions3, "width 300!, span 2");
 		panel_songs.add(btn_meta, "width 120!,height 30!, wrap");
-		panel_songs.add(new JScrollPane(list_History), "width 430!, height 175!, span 3");
+		panel_songs.add(songs, "width 430!, height 175!, span 3");
 		
 		//Wünsche Panel wird bestückt
 		panel_wishes.add(cbox_subscriptions, "width 300!, span 2");
@@ -128,7 +132,7 @@ public class GUI extends JFrame implements ActionListener{
 		panel_comments.add(new JScrollPane(txp_comments), "width 430!, height 165!, span 5");
 		
 		//Panels werden dem Tabbed Pane hinzugefügt
-		tab_pane.add("Events", panel_events);
+		//tab_pane.add("Events", panel_events);
 		tab_pane.add("DJs", panel_list);
 		tab_pane.add("Songs", panel_songs);
 		tab_pane.add("Wünsche", panel_wishes);
