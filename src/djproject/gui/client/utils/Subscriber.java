@@ -108,7 +108,7 @@ public class Subscriber {
 			
 			if(subPossible){
 		        node.addItemEventListener(ilistener);
-		    	Subscription sub = node.subscribe("user2@"+server);
+		    	Subscription sub = node.subscribe(user+"@"+server);
 		    	System.out.println("Subscribed: " + sub.getId());
 			}
 	       
@@ -134,7 +134,7 @@ public class Subscriber {
 			for(int i = 0; i < subs.size();i++){
 				if(subs.get(i).getNode().equals(nodeUnsub)){
 					node.removeItemEventListener(ilistener);
-			    	node.unsubscribe("user2@"+server, subs.get(i).getId());
+			    	node.unsubscribe(user+"@"+server, subs.get(i).getId());
 			    	subs.remove(i);
 				}
 			}
