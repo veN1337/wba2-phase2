@@ -22,6 +22,7 @@ import javax.swing.table.TableRowSorter;
 
 import djproject.gui.client.RESTHandler;
 import djproject.gui.dj.DateStringComparator;
+import djproject.song_history.History;
 import djproject.song_history.Song;
 
 import net.miginfocom.swing.MigLayout;
@@ -80,6 +81,33 @@ public class HistoryPanel extends JPanel {
 		table_history.setRowSorter(null);
 		tableModelHistory.getDataVector().removeAllElements();
 		for(Song s: RESTHandler.getHistory().getSong()) {
+			Vector<String> v = new Vector<String>();
+			Format formatter = new SimpleDateFormat( "dd.MM.yyyy HH:mm:ss" );
+			v.add(String.valueOf(formatter.format((s.getTimePlayedAt().toGregorianCalendar().getTime()))));
+			djproject.songs.Song s2 = RESTHandler.getSong(s.getSongId());
+			v.add(s2.getArtist());
+			v.add(s2.getTitle());
+			v.add(s2.getAlbum());
+			v.add(s2.getAlbumArtist());			
+			v.add((s2.getNumberInAlbum() == null) ? "" : String.valueOf(s2.getNumberInAlbum()));
+			v.add(s2.getGenre());
+			formatter = new SimpleDateFormat( "mm:ss" );
+			v.add(String.valueOf(formatter.format((s2.getLength()*1000))));
+			v.add(String.valueOf(s2.getId()));
+			tableModelHistory.addRow(v);
+		}
+		
+		autoFitTable();
+		tableModelHistory.fireTableDataChanged();
+		table_history.setRowSorter(sorter);
+		sortByColumn(0);
+
+	}
+	
+	public void updateList(History hist) {
+		table_history.setRowSorter(null);
+		tableModelHistory.getDataVector().removeAllElements();
+		for(Song s: hist.getSong()) {
 			Vector<String> v = new Vector<String>();
 			Format formatter = new SimpleDateFormat( "dd.MM.yyyy HH:mm:ss" );
 			v.add(String.valueOf(formatter.format((s.getTimePlayedAt().toGregorianCalendar().getTime()))));
