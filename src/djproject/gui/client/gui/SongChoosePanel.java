@@ -24,7 +24,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
-import djproject.gui.dj.utils.RESTHandler;
+import djproject.gui.client.utils.RESTHandler;
 import djproject.songs.Song;
 
 import net.miginfocom.swing.MigLayout;
@@ -72,8 +72,6 @@ public class SongChoosePanel extends JPanel {
 		cboxModelFilter.addElement("Artist");
 		cboxModelFilter.addElement("Title");
 		cboxModelFilter.addElement("Genre");
-		
-		JLabel dummy = new JLabel();
 		
 		panel_filter.add(label_filtertype, "width 120!, height 30!, span 3, wrap");
 		panel_filter.add(cbox_filter, "width 120!, height 30!, span 3, wrap");
