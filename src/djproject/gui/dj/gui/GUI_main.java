@@ -3,7 +3,10 @@ package djproject.gui.dj.gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.WindowEvent;
+import java.net.URL;
+
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -185,6 +188,7 @@ public class GUI_main extends JFrame {
 		add(tab_pane);
 		
 		//setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setIconImage(makeImageIcon("/images/vinyl.png").getImage());
 		setSize(new Dimension(550,550));
 		setResizable(false);
 		setVisible(true);
@@ -203,5 +207,10 @@ public class GUI_main extends JFrame {
 	        dispose();
 	    }
 	}
+	
+	public ImageIcon makeImageIcon(String relative_path) {
+        URL imgURL = getClass().getResource(relative_path);
+        return new ImageIcon(imgURL);
+    }
 
 }
