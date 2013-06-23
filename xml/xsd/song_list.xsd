@@ -19,7 +19,7 @@
     	</xs:simpleType>
     </xs:element>
     <xs:element name="album" type="xs:string"></xs:element>
-    <xs:element name="album_cover" type="xs:string"></xs:element>
+    <xs:element name="album_cover" type="xs:anyURI"></xs:element>
     <xs:element name="album_artist" type="xs:string"></xs:element>
     <xs:element name="number_in_album">
     	<xs:simpleType>
