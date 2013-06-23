@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<songs 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xsi:noNamespaceSchemaLocation="./xsd/song_list.xsd">
+<songs>
     <song>
         <id>0</id>
         <artist>Nirvana</artist>
@@ -31,5 +29,45 @@
         <album_artist>Zedd</album_artist>
         <number_in_album>1</number_in_album>
         <genre>Dance</genre>
+    </song>
+    <song>
+        <id>3</id>
+        <artist>David Guetta</artist>
+        <title>Just One Last Time feat. Taped Rai</title>
+        <length>227</length>
+        <album>Nothing But the Beat 2.0</album>
+        <album_artist>David Guetta</album_artist>
+        <number_in_album>8</number_in_album>
+        <genre>House</genre>
+    </song>
+    <song>
+        <id>4</id>
+        <artist>30 Seconds To Mars</artist>
+        <title>Kings And Queens</title>
+        <length>348</length>
+        <album>This Is War</album>
+        <album_artist>30 Seconds To Mars</album_artist>
+        <number_in_album>3</number_in_album>
+        <genre>Unknown</genre>
+    </song>
+    <song>
+        <id>5</id>
+        <artist>Dead by April</artist>
+        <title>Trapped</title>
+        <length>188</length>
+        <album>Dead by April (Bonus Version)</album>
+        <album_artist>Dead by April</album_artist>
+        <number_in_album>1</number_in_album>
+        <genre>Pop Metal</genre>
+    </song>
+    <song>
+        <id>6</id>
+        <artist>A Day To Remember</artist>
+        <title>If I Leave</title>
+        <length>204</length>
+        <album>What Separates Me From You</album>
+        <album_artist>A Day to Remember</album_artist>
+        <number_in_album>10</number_in_album>
+        <genre>Metal</genre>
     </song>
 </songs>
