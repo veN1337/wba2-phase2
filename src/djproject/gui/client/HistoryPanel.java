@@ -103,9 +103,7 @@ public class HistoryPanel extends JPanel {
 
 	}
 	
-	public int getSongID(){
-		return Integer.parseInt((String)(table_history.getValueAt(table_history.getSelectedRow(),0)));
-	}
+	
 
 	public void autoFitTable() {
 		for(int j=0; j < table_history.getColumnModel().getColumnCount(); j++) {

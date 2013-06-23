@@ -83,7 +83,7 @@ CaretListener {
 		}
 		else if (e.getSource().equals(gui.btn_wish)){
 			Wish w = new Wish();
-			w.setSongId(gui.history.getSongID());
+			w.setSongId(gui.songs.getSongID());
 			RESTHandler.addWish(w);
 			JOptionPane.showMessageDialog(gui,"The wish has been sent.");
 		}

@@ -137,6 +137,10 @@ public class SongChoosePanel extends JPanel {
 		table_songs.setAutoCreateRowSorter(true);
 
 	}
+	
+	public int getSongID(){
+		return Integer.parseInt((String)(table_songs.getValueAt(table_songs.getSelectedRow(),0)));
+	}
 
 	public void autoFitTable() {
 		for(int j=0; j < table_songs.getColumnModel().getColumnCount(); j++) {

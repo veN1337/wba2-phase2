@@ -136,9 +136,9 @@ public class GUI extends JFrame implements ActionListener{
 		//Panels werden dem Tabbed Pane hinzugefügt
 		//tab_pane.add("Events", panel_events);
 		tab_pane.add("DJs", panel_list);
-		tab_pane.add("Songs", panel_songs);
-		tab_pane.add("Wünsche", panel_wishes);
-		tab_pane.add("Kommentare", panel_comments);
+		tab_pane.add("Songhistory", panel_songs);
+		tab_pane.add("Wishes", panel_wishes);
+		tab_pane.add("Comments", panel_comments);
 		add(tab_pane);
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
