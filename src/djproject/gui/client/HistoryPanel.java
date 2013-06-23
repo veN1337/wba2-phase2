@@ -46,7 +46,7 @@ public class HistoryPanel extends JPanel {
 	    }
 	};
 	JTable table_history = new JTable(tableModelHistory);
-	TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(tableModelHistory);
+	//TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<DefaultTableModel>(tableModelHistory);
 	
 	public HistoryPanel(ListenerHandler listener) {
 		
@@ -99,8 +99,8 @@ public class HistoryPanel extends JPanel {
 		
 		autoFitTable();
 		tableModelHistory.fireTableDataChanged();
-		table_history.setRowSorter(sorter);
-		sortByColumn(0);
+		//table_history.setRowSorter(sorter);
+		//sortByColumn(0);
 
 	}
 	
@@ -126,8 +126,8 @@ public class HistoryPanel extends JPanel {
 		
 		autoFitTable();
 		tableModelHistory.fireTableDataChanged();
-		table_history.setRowSorter(sorter);
-		sortByColumn(0);
+//		table_history.setRowSorter(sorter);
+//		sortByColumn(0);
 
 	}
 	
@@ -168,11 +168,11 @@ public class HistoryPanel extends JPanel {
 	
 	}
 	
-	public void sortByColumn(int index) {
-		RowSorter<? extends TableModel> sorter = table_history.getRowSorter();
-    	ArrayList<RowSorter.SortKey> list = new ArrayList<RowSorter.SortKey>();
-    	list.add( new RowSorter.SortKey(index, SortOrder.DESCENDING) );
-    	sorter.setSortKeys(list);
-	}
+//	public void sortByColumn(int index) {
+//		RowSorter<? extends TableModel> sorter = table_history.getRowSorter();
+//    	ArrayList<RowSorter.SortKey> list = new ArrayList<RowSorter.SortKey>();
+//    	list.add( new RowSorter.SortKey(index, SortOrder.DESCENDING) );
+//    	sorter.setSortKeys(list);
+//	}
 
 }
