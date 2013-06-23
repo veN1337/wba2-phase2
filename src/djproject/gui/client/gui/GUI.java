@@ -4,11 +4,13 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -138,6 +140,7 @@ public class GUI extends JFrame implements ActionListener{
 		tab_pane.add("Comments", panel_comments);
 		add(tab_pane);
 		
+		setIconImage(makeImageIcon("/images/vinyl.png").getImage());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(new Dimension(450,300));
 		setResizable(false);
@@ -159,6 +162,11 @@ public class GUI extends JFrame implements ActionListener{
 			subs.addElement(s[i]);
 		}
 	}
+	
+	public ImageIcon makeImageIcon(String relative_path) {
+        URL imgURL = getClass().getResource(relative_path);
+        return new ImageIcon(imgURL);
+    }
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
