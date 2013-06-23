@@ -30,13 +30,15 @@ public class Subscriber {
 	Iterator<Item> it2;
 	Item[] list;
 	List<Subscription> subs;
+	public String user;
 	
-	public Subscriber(GUI gui){
+	public Subscriber(GUI gui, String username, String password){
 		this.gui = gui;
-		connect();
+		this.user = username;
+		connect(username,password);
 	}
 	
-	public void connect(){
+	public void connect(String username, String password){
 		try {
 			
 			ConnectionConfiguration config = new ConnectionConfiguration(server, port);
@@ -49,7 +51,7 @@ public class Subscriber {
 			// Connect to the server
 			con.connect();
 			// Log into the server
-			con.login("user2", "asd", "java");
+			con.login(username, password, "java");
 			System.out.println("Connected");
 			
 			// Create a pubsub manager using an existing Connection

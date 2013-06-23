@@ -56,7 +56,7 @@ public class HistoryPanel extends JPanel {
 		table_history.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		table_history.addMouseListener(listener);
-		sorter.setComparator(3, new DateStringComparator());
+		//sorter.setComparator(3, new DateStringComparator());
 		
 		table_history.getTableHeader().setReorderingAllowed(false);
 		
@@ -72,7 +72,7 @@ public class HistoryPanel extends JPanel {
 		
 		updateList();
 		
-		this.add(new JScrollPane(table_history), "width 300!, height 180!");
+		this.add(new JScrollPane(table_history), "width 430!, height 175!");
 
 	}
 	

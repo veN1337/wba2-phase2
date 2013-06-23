@@ -75,13 +75,13 @@ public class SongChoosePanel extends JPanel {
 		
 		JLabel dummy = new JLabel();
 		
-		panel_filter.add(label_filtertype, "width 150!, height 30!, span 3, wrap");
-		panel_filter.add(cbox_filter, "width 150!, height 30!, span 3, wrap");
-		panel_filter.add(label_filtertext, "width 150!, height 30!, span 3, wrap");
-		panel_filter.add(txt_filter, "width 150!, height 30!, span 3, wrap");
-		panel_filter.add(btn_filter, "width 65!, height 30!, span 1");
-		panel_filter.add(dummy, "width 10!, height 30!, span 1");
-		panel_filter.add(btn_filterreset, "width 65!, height 30!, span 3");
+		panel_filter.add(label_filtertype, "width 120!, height 30!, span 3, wrap");
+		panel_filter.add(cbox_filter, "width 120!, height 30!, span 3, wrap");
+		panel_filter.add(label_filtertext, "width 120!, height 30!, span 3, wrap");
+		panel_filter.add(txt_filter, "width 120!, height 30!, span 3, wrap");
+		panel_filter.add(btn_filter, "width 55!, height 30!, span 1");
+		//panel_filter.add(dummy, "width 10!, height 30!, span 1");
+		panel_filter.add(btn_filterreset, "width 62!, height 30!, span 3");
 		
 		btn_filter.addActionListener(listener);
 		btn_filterreset.addActionListener(listener);
@@ -110,7 +110,7 @@ public class SongChoosePanel extends JPanel {
 		updateSongList();
 		
 		this.add(new JScrollPane(table_songs), "width 300!, height 180!");
-		this.add(panel_filter, "width 140!, height 180!");
+		this.add(panel_filter, "width 130!, height 180!");
 
 	}
 	

@@ -7,12 +7,17 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
+import java.util.GregorianCalendar;
 
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
+import djproject.comments.Comment;
 import djproject.xmpp.Subscriber;
 
 public class ListenerHandler extends MouseMotionAdapter implements
@@ -20,9 +25,10 @@ MouseListener, KeyListener, ActionListener, ChangeListener,
 CaretListener {
 	
 	GUI gui = new GUI(this);
-	Subscriber sub = new Subscriber(gui);
+	Subscriber sub;
 	
-	public ListenerHandler(){
+	public ListenerHandler(String username,String password){
+		sub = new Subscriber(gui, username,password);
 	}
 	
 	@Override
@@ -47,6 +53,23 @@ CaretListener {
 		else if(e.getSource().equals(gui.btn_unsubscribeDJ)){
 			sub.unsubscribe((String)gui.list_DJs.getSelectedValue());
 			gui.updateSubs(sub.getSubs());
+		}
+		else if (e.getSource().equals(gui.btn_comment)){
+			Comment c = new Comment();
+			c.setContent(gui.txp_comments.getText());
+			c.setRating(gui.sli_rating.getValue());
+			c.setAuthor(sub.user);
+			try {
+				GregorianCalendar gregor = new GregorianCalendar();
+				DatatypeFactory datatype = DatatypeFactory.newInstance();
+				XMLGregorianCalendar now = datatype.newXMLGregorianCalendar(gregor);
+				c.setTime(now);
+			} catch (DatatypeConfigurationException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			RESTHandler.addComment(c);
 		}
 	}
 

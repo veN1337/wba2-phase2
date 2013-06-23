@@ -66,6 +66,7 @@ public class GUI extends JFrame implements ActionListener{
 	JTextArea txp_comments = new JTextArea();
 	
 	SongChoosePanel songs;
+	HistoryPanel history;
 	
 	DefaultListModel<String> listModelDJ = new DefaultListModel<String>();
 	JList list_DJs = new JList(listModelDJ);
@@ -95,6 +96,7 @@ public class GUI extends JFrame implements ActionListener{
 		cbox_subscriptions3.addActionListener(listener);
 		
 		songs = new SongChoosePanel(listener);
+		history = new HistoryPanel(listener);
 		
 		sli_rating.setMajorTickSpacing(9);
 		sli_rating.setMinorTickSpacing(1);
@@ -115,14 +117,14 @@ public class GUI extends JFrame implements ActionListener{
 		//Song Panel wird bestückt
 		panel_songs.add(lab_playingnow, "span 1, width 100!");
 		panel_songs.add(lab_currentsong, "span 2, wrap");
-		panel_songs.add(cbox_subscriptions3, "width 300!, span 2");
-		panel_songs.add(btn_meta, "width 120!,height 30!, wrap");
-		panel_songs.add(songs, "width 430!, height 175!, span 3");
+		panel_songs.add(cbox_subscriptions3, "width 430!, span 3, wrap");
+		//panel_songs.add(btn_meta, "width 120!,height 30!, wrap");
+		panel_songs.add(history, "width 430!, height 175!, span 3");
 		
 		//Wünsche Panel wird bestückt
 		panel_wishes.add(cbox_subscriptions, "width 300!, span 2");
 		panel_wishes.add(btn_wish, "width 120!,height 30!, wrap");
-		panel_wishes.add(new JScrollPane(list_Songs), "width 430!, height 200!, span 3");
+		panel_wishes.add(songs, "width 430!, height 200!, span 3");
 		
 		//Kommentar Panel wird bestückt
 		panel_comments.add(cbox_subscriptions2, "width 300!, span 3");

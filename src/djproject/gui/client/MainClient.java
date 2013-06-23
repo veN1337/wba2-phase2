@@ -18,6 +18,6 @@ public class MainClient {
 	            // If Nimbus is not available, you can set the GUI to another look
 	            // and feel.
 	        }
-			ListenerHandler listener = new ListenerHandler();
+			GUI_start start = new GUI_start();
 	}
 }
