@@ -9,6 +9,8 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
 import java.util.GregorianCalendar;
 
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.ChangeEvent;
@@ -18,6 +20,7 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import djproject.comments.Comment;
+import djproject.wishes.Wish;
 import djproject.xmpp.Subscriber;
 
 public class ListenerHandler extends MouseMotionAdapter implements
@@ -55,21 +58,40 @@ CaretListener {
 			gui.updateSubs(sub.getSubs());
 		}
 		else if (e.getSource().equals(gui.btn_comment)){
-			Comment c = new Comment();
-			c.setContent(gui.txp_comments.getText());
-			c.setRating(gui.sli_rating.getValue());
-			c.setAuthor(sub.user);
-			try {
-				GregorianCalendar gregor = new GregorianCalendar();
-				DatatypeFactory datatype = DatatypeFactory.newInstance();
-				XMLGregorianCalendar now = datatype.newXMLGregorianCalendar(gregor);
-				c.setTime(now);
-			} catch (DatatypeConfigurationException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+			if(!gui.txp_comments.getText().isEmpty()){
+				Comment c = new Comment();
+				c.setContent(gui.txp_comments.getText().replace("\n"," - "));
+				c.setRating(gui.sli_rating.getValue());
+				c.setAuthor(sub.user);
+				try {
+					GregorianCalendar gregor = new GregorianCalendar();
+					DatatypeFactory datatype = DatatypeFactory.newInstance();
+					XMLGregorianCalendar now = datatype.newXMLGregorianCalendar(gregor);
+					c.setTime(now);
+				} catch (DatatypeConfigurationException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				System.out.println(gui.txp_comments.getText());
+				
+				RESTHandler.addComment(c);
+				
+				JOptionPane.showMessageDialog(gui,"The comment has been sent.");
+				gui.txp_comments.setText("");
+				gui.sli_rating.setValue(5);
 			}
-			
-			RESTHandler.addComment(c);
+		}
+		else if (e.getSource().equals(gui.btn_wish)){
+			Wish w = new Wish();
+			w.setSongId(gui.history.getSongID());
+			RESTHandler.addWish(w);
+			JOptionPane.showMessageDialog(gui,"The wish has been sent.");
+		}
+		else if(e.getSource().equals(gui.songs.btn_filter) || e.getSource().equals(gui.songs.txt_filter) || e.getSource().equals(gui.songs.btn_filterreset)) {
+			if(e.getSource().equals(gui.songs.btn_filterreset)) {
+				gui.songs.txt_filter.setText("");
+			}
+			gui.songs.updateSongList();
 		}
 	}
 
