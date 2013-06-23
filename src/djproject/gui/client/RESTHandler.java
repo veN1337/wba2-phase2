@@ -36,7 +36,7 @@ public class RESTHandler {
 	}
 
 	public static void addComment(Comment c) {
-		WebResource service = client.resource(host + "/wishes/");
+		WebResource service = client.resource(host + "/comments/");
 		service.type("application/xml")
 	            .accept("application/xml")
 	            .entity(c)
